@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Cinema_Assignment/1.0.0": {
+        "runtime": {
+          "Cinema_Assignment.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Cinema_Assignment/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

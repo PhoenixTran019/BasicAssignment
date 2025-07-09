@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "D:\\Visual Project\\Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\cinema\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\cinema\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\controllers\\cinemacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\controllers\\cinemacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\cinema_assignment.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\cinema_assignment.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +31,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Cinema_Assignment\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T05:35:15.076Z",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Cinema_Assignment\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACkAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T15:39:12.105Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\appsettings.json",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\appsettings.json",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\appsettings.json*",
-              "RelativeToolTip": "Cinema_Assignment\\appsettings.json*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-08T05:33:41.784Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Cinema\\Index.cshtml",
+              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\Cinema\\Index.cshtml",
+              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Cinema\\Index.cshtml",
+              "RelativeToolTip": "Cinema_Assignment\\Views\\Cinema\\Index.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T15:38:16.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CinemaController.cs",
+              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\CinemaController.cs",
+              "RelativeDocumentMoniker": "Cinema_Assignment\\Controllers\\CinemaController.cs",
+              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\CinemaController.cs",
+              "RelativeToolTip": "Cinema_Assignment\\Controllers\\CinemaController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwBYAAAB0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-08T15:34:10.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Cinema_Assignment.csproj",
+              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Cinema_Assignment.csproj",
+              "RelativeDocumentMoniker": "Cinema_Assignment\\Cinema_Assignment.csproj",
+              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Cinema_Assignment.csproj",
+              "RelativeToolTip": "Cinema_Assignment\\Cinema_Assignment.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-08T08:07:09.519Z",
               "EditorCaption": ""
             }
           ]

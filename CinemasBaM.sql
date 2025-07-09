@@ -200,6 +200,7 @@ Create Table Receipts
 	CustomerID int,
 	EmployeeID int,
 	PaymentID int,
+	CinemaID int,
 	Discount decimal (18,2),
 	PurchaseDate datetime default Getdate(),
 	TotalPrice decimal (18,2),
@@ -207,7 +208,8 @@ Create Table Receipts
 	Note nvarchar (max)
 	Foreign key (CustomerID) References Customers (CustomerID),
 	Foreign key (EmployeeID) References Employees (EmployeeID),
-	Foreign key (PaymentID) References Payments (PaymentID)
+	Foreign key (PaymentID) References Payments (PaymentID),
+	Foreign key (ReceiptID) References Receipts (ReceiptID)
 );
 go
 
@@ -234,17 +236,6 @@ Create table Foods
 );
 go
 
-
-Create Table Foods_Receipts
-(
-	FoodOrderId int Primary key,
-	ReceiptID int,
-	Quanlity int,
-	UnitPrice Decimal (18,2),
-	TotalPrice Decimal (18,2),
-	FOREIGN KEY (ReceiptID) REFERENCES Receipts(ReceiptID)
-);
-go
 
 Create table Foods_Cinemas
 (
@@ -401,6 +392,104 @@ CREATE TABLE DeletedReceipts (
     FOREIGN KEY (DeletedBy) REFERENCES Employees(EmployeeID)
 );
 go
+
+CREATE TABLE Items (
+    ItemID INT PRIMARY KEY,
+    ItemName NVARCHAR(255),
+    Unit NVARCHAR(50),
+	QuanlityPerUnit int,
+    Category NVARCHAR(100),
+    Description NVARCHAR(500)
+);
+go
+
+CREATE TABLE Cinemas_ItemsStock (
+    StockID INT PRIMARY KEY IDENTITY(1,1),
+    CinemaID INT,
+    ItemID INT,
+    Quantity INT DEFAULT 0,
+    LastUpdated DATETIME DEFAULT GETDATE(),
+    Note NVARCHAR(255),
+    FOREIGN KEY (CinemaID) REFERENCES Cinemas(CinemaID),
+    FOREIGN KEY (ItemID) REFERENCES Items(ItemID)
+);
+go
+
+
+CREATE TABLE Requests (
+    RequestID INT PRIMARY KEY,
+    RequestDate DATE Default Getdate(),
+    ApprovedDate DATE,
+    ConfirmDate DATE,
+    Status INT,
+    RequestType INT, -- 1 = Nhập hàng, 2 = Xuất, 3 = Hủy, ...
+    EmployeeID INT,
+    CinemaID INT,
+    Note NVARCHAR(2048),
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
+    FOREIGN KEY (CinemaID) REFERENCES Cinemas(CinemaID)
+);
+go
+
+CREATE TABLE RequestDetails (
+    DetailID INT PRIMARY KEY,
+    RequestID INT,
+    ItemID INT,
+    BaseUnit INT,
+    QuantityPerUnit INT,
+    Note NVARCHAR(1024),
+    FOREIGN KEY (RequestID) REFERENCES Requests(RequestID),
+    FOREIGN KEY (ItemID) REFERENCES Items(ItemID)
+);
+go
+
+CREATE TABLE ItemDisposals (
+    DisposalID INT PRIMARY KEY IDENTITY(1,1),
+    CinemaID INT,
+    ItemID INT,
+    Quantity INT,
+    DisposalDate DATETIME DEFAULT GETDATE(),
+    Reason NVARCHAR(500),
+    ApprovedBy INT, -- EmployeeID người duyệt
+    RequestedBy INT, -- EmployeeID người đề xuất
+    Note NVARCHAR(1000),
+	image nvarchar (2000),
+    FOREIGN KEY (CinemaID) REFERENCES Cinemas(CinemaID),
+    FOREIGN KEY (ItemID) REFERENCES Items(ItemID),
+    FOREIGN KEY (ApprovedBy) REFERENCES Employees(EmployeeID),
+    FOREIGN KEY (RequestedBy) REFERENCES Employees(EmployeeID)
+);
+go
+
+CREATE TABLE Foods_CinemasStock (
+    StockID INT PRIMARY KEY IDENTITY(1,1),
+    CinemaID INT,
+    FoodID INT,
+    Quantity INT DEFAULT 0,
+    LastUpdated DATETIME DEFAULT GETDATE(),
+    Note NVARCHAR(255),
+    FOREIGN KEY (CinemaID) REFERENCES Cinemas(CinemaID),
+    FOREIGN KEY (FoodID) REFERENCES Foods(FoodID)
+);
+go
+
+
+
+CREATE TRIGGER trg_DecreaseFoodStock
+ON Receipt_Foods
+AFTER INSERT
+AS
+BEGIN
+    UPDATE FCS
+    SET FCS.Quantity = FCS.Quantity - i.Quantity,
+        FCS.LastUpdated = GETDATE()
+    FROM Foods_CinemasStock FCS
+    JOIN inserted i ON i.FoodID = FCS.FoodID
+    JOIN Receipts r ON r.ReceiptID = i.ReceiptID
+    WHERE r.CinemaID = FCS.CinemaID;
+END;
+GO
+
 
 
 

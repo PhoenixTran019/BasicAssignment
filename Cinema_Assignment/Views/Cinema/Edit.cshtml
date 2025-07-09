@@ -1,0 +1,24 @@
+﻿// Views/Cinema/Edit.cshtml
+@model Cinema_Assignment.Models.CinemaModel
+<h2>Cập nhật Rạp</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="CinemaID" />
+    <div class="mb-3">
+        <label>Tên Rạp</label>
+        <input asp-for="CinemaName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Mã Rạp</label>
+        <input asp-for="CinemaCode" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Địa chỉ</label>
+        <input asp-for="Address" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>SĐT</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

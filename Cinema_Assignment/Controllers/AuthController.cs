@@ -13,6 +13,8 @@ namespace Cinema_Assignment.Controllers
     {
         private readonly string _connectionString;
         private readonly IWebHostEnvironment _env;
+
+        
         public AuthController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
@@ -34,10 +36,10 @@ namespace Cinema_Assignment.Controllers
 
                 //Employee login
                 var cmd = new SqlCommand(@"
-                    Select e.EmployeeID, e.Roll
-                    From AccountEmployee ae
-                    join Employee e on ae.EmployeeID = e.EmployeeID
-                    where ae.Username = @Username and ae.Password = @Password", conn);
+                    SELECT e.EmployeeID, e.Roll
+                    FROM AccountEmployees ae
+                    JOIN Employees e ON ae.EmployeeID = e.EmployeeID
+                    WHERE ae.Username = @username AND ae.PasswordHash = @password", conn);
 
                 cmd.Parameters.AddWithValue("@username", model.Username);
                 cmd.Parameters.AddWithValue("@password", hash);
@@ -45,13 +47,16 @@ namespace Cinema_Assignment.Controllers
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
+                    int roll = (int)reader["Roll"];
+                    HttpContext.Session.SetInt32("UserRoll", roll);
                     HttpContext.Session.SetString ("UserType", "Employee");
                     HttpContext.Session.SetInt32("UserID", (int)reader["EmployeeID"]);
 
-                    int role = (int)reader["Roll"];
-                    return role switch
+                    
+
+                    return roll switch
                     {
-                        1 => RedirectToAction("Index", "Admin"),
+                        1 => RedirectToAction("Home", "Admin"),
                         2 => RedirectToAction("Index", "Cinema"),
                         3 => RedirectToAction("Index", "TeamLead"),
                         4 => RedirectToAction("Index", "Employee")
@@ -60,6 +65,12 @@ namespace Cinema_Assignment.Controllers
             }
             ModelState.AddModelError("", "Invalid username or password.");
             return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // Xóa toàn bộ session
+            return RedirectToAction("Index", "Home"); // ← Chuyển về trang Home
         }
 
         private string ComputeSha256Hash(string rawData)

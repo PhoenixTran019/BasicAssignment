@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Cinema_Assignment.Models.CinemaModel>
+
+
+<h2>Danh sách Rạp</h2>
+<a class="btn btn-success mb-2" asp-action="Create">+ Thêm Rạp</a>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên Rạp</th>
+            <th>Mã</th>
+            <th>Địa chỉ</th>
+            <th>SĐT</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CinemaID</td>
+            <td>@item.CinemaName</td>
+            <td>@item.CinemaCode</td>
+            <td>@item.Address</td>
+            <td>@item.PhoneNumber</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CinemaID" class="btn btn-warning btn-sm">Sửa</a>
+                <a asp-action="Delete" asp-route-id="@item.CinemaID" class="btn btn-danger btn-sm">Xoá</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+

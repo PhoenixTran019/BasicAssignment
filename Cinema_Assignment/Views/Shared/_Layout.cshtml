@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@{
+    string userType = Context.Session.GetString("UserType");
+    int? userRole = Context.Session.GetInt32("UserRoll");
+    string homeUrl = Url.Action("Index", "Home");
+
+    if (userType == "Employee" && userRole == 1)
+    {
+        homeUrl = Url.Action("Home", "Admin");
+    }
+    else if (userType == "Customer")
+    {
+        homeUrl = Url.Action("Index", "Customer");
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,40 +23,94 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Cinema_Assignment.styles.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cinema_Assignment</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand fw-bold" href="@homeUrl">
+                    <i class="bi bi-film"></i> Cinema_Assignment
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @if (userType == "Employee" && userRole == 1)
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Cinema" asp-action="Index">Cinema></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Room" asp-action="Index">Phòng chiếu</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Movie" asp-action="Index">Phim</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Showtime" asp-action="Index">Xuất chiếu</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Privacy">Chính sách</a></li>
+                        }
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        @if (string.IsNullOrEmpty(userType))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Auth" asp-action="Login">
+                                    <i class="bi bi-box-arrow-in-right"></i> Đăng nhập
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Auth" asp-action="Register">
+                                    <i class="bi bi-person-plus-fill"></i> Đăng ký
+                                </a>
+                            </li>
+                        }
+                        else if (userType == "Employee" && userRole == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Admin" asp-action="Dashboard">
+                                    <i class="bi bi-speedometer2"></i> Trang Admin
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Auth" asp-action="Logout">
+                                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-person-circle"></i> Tài khoản
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Auth" asp-action="Logout">
+                                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="container mt-4 flex-grow-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Cinema_Assignment - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="bg-light border-top text-muted py-2">
+        <div class="container text-center">
+            &copy; 2025 - Cinema_Assignment - <a asp-controller="Home" asp-action="Privacy">Chính sách</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

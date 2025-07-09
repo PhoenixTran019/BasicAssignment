@@ -31,3 +31,12 @@ D:\Visual Project\Assignment\Cinema_Assignment\obj\Debug\net8.0\refint\Cinema_As
 D:\Visual Project\Assignment\Cinema_Assignment\obj\Debug\net8.0\Cinema_Assignment.pdb
 D:\Visual Project\Assignment\Cinema_Assignment\obj\Debug\net8.0\Cinema_Assignment.genruntimeconfig.cache
 D:\Visual Project\Assignment\Cinema_Assignment\obj\Debug\net8.0\ref\Cinema_Assignment.dll
+D:\Visual Project\Assignment\Cinema_Assignment\bin\Debug\net8.0\System.Data.SqlClient.dll
+D:\Visual Project\Assignment\Cinema_Assignment\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+D:\Visual Project\Assignment\Cinema_Assignment\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+D:\Visual Project\Assignment\Cinema_Assignment\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+D:\Visual Project\Assignment\Cinema_Assignment\bin\Debug\net8.0\runtimes\unix\lib\net8.0\System.Data.SqlClient.dll
+D:\Visual Project\Assignment\Cinema_Assignment\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
+D:\Visual Project\Assignment\Cinema_Assignment\obj\Debug\net8.0\Cinema_Assignment.csproj.AssemblyReference.cache
+D:\Visual Project\Assignment\Cinema_Assignment\obj\Debug\net8.0\Cinema_Assignment.sourcelink.json
+D:\Visual Project\Assignment\Cinema_Assignment\obj\Debug\net8.0\Cinema_A.DB03738A.Up2Date

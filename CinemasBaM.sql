@@ -409,6 +409,7 @@ CREATE TABLE Cinemas_ItemsStock (
     ItemID INT,
     Quantity INT DEFAULT 0,
     LastUpdated DATETIME DEFAULT GETDATE(),
+	IsActive int,
     Note NVARCHAR(255),
     FOREIGN KEY (CinemaID) REFERENCES Cinemas(CinemaID),
     FOREIGN KEY (ItemID) REFERENCES Items(ItemID)

@@ -131,6 +131,7 @@ Create Table SeatTypes
 	TypeID int Primary Key,
 	TypeName int, --1. Standard, 2.VIP
 	Price Decimal (18,2)
+	Decription nvarchar (50)
 );
 go
 

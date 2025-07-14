@@ -1,0 +1,24 @@
+﻿@model SeatTypeModel
+
+<h2>➕ Thêm loại ghế mới</h2>
+
+<form asp-action="CreateSeatType" method="post">
+    <div class="mb-2">
+        <label>Mã loại ghế</label>
+        <input asp-for="TypeID" class="form-control" type="number" required />
+    </div>
+    <div class="mb-2">
+        <label>Seat Name</label>
+        <input asp-for="TypeName" class="form-control" type="number" required />
+    </div>
+    <div class="mb-2">
+        <label>Giá</label>
+        <input asp-for="Price" class="form-control" type="number" step="1000" required />
+    </div>
+    <div class="mb-2">
+        <label>Description</label>
+        <input asp-for="Description" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

@@ -1,0 +1,39 @@
+﻿@model ItemModel
+
+<div class="container mt-4">
+    <h2 class="text-primary mb-4">✏️ Chỉnh sửa mặt hàng</h2>
+
+    <form asp-action="Edit" method="post" class="card shadow-sm p-4">
+        <input type="hidden" asp-for="ItemID" />
+
+        <div class="mb-3">
+            <label asp-for="ItemName" class="form-label">Tên mặt hàng</label>
+            <input asp-for="ItemName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Unit" class="form-label">Đơn vị</label>
+            <input asp-for="Unit" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="QuanlityPerUnit" class="form-label">Số lượng / đơn vị</label>
+            <input asp-for="QuanlityPerUnit" class="form-control" type="number" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Category" class="form-label">Loại</label>
+            <input asp-for="Category" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Mô tả</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary">⬅️ Quay lại</a>
+            <button type="submit" class="btn btn-success">💾 Lưu thay đổi</button>
+        </div>
+    </form>
+</div>

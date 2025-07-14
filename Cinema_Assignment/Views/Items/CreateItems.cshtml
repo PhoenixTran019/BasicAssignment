@@ -1,0 +1,96 @@
+﻿@model ItemModel
+
+<div class="container mt-4">
+    <h2 class="text-primary mb-4">➕ Thêm mặt hàng mới</h2>
+
+    <form asp-action="CreateItems" method="post" class="card shadow-sm p-4">
+        <div class="mb-3">
+            <label asp-for="ItemID" class="form-label">Mã mặt hàng (ItemID)</label>
+            <input asp-for="ItemID" class="form-control" type="number" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ItemName" class="form-label">Tên mặt hàng</label>
+            <input asp-for="ItemName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Unit" class="form-label">Đơn vị</label>
+            <select asp-for="Unit" class="form-select" asp-items="ViewBag.UnitList" id="unitSelect" required>
+                <option value="">-- Chọn đơn vị --</option>
+                <option value="Khác">Khác</option>
+            </select>
+
+            <input type="text" class="form-control mt-2" id="unitCustom" name="Unit" placeholder="Nhập đơn vị khác"
+                   style="display:none;" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="QuanlityPerUnit" class="form-label">Số lượng / đơn vị</label>
+            <input asp-for="QuanlityPerUnit" class="form-control" type="number" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Category" class="form-label">Loại</label>
+            <select asp-for="Category" class="form-select" asp-items="ViewBag.CategoryList" id="categorySelect" required>
+                <option value="">-- Chọn loại --</option>
+                <option value="Khác">Khác</option>
+            </select>
+
+            <input type="text" class="form-control mt-2" id="categoryCustom" name="Category" placeholder="Nhập loại khác"
+                   style="display:none;" />
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Mô tả</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary">⬅️ Quay lại</a>
+            <button type="submit" class="btn btn-primary">💾 Tạo mới</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const unitSelect = document.getElementById("unitSelect");
+        const unitCustom = document.getElementById("unitCustom");
+
+        const categorySelect = document.getElementById("categorySelect");
+        const categoryCustom = document.getElementById("categoryCustom");
+
+        unitSelect.addEventListener("change", function () {
+            if (this.value === "Khác") {
+                unitCustom.style.display = "block";
+                unitCustom.required = true;
+                unitSelect.name = "Unit_Ignore"; // Đổi tên để tránh bị ghi đè
+                unitCustom.name = "Unit";
+            } else {
+                unitCustom.style.display = "none";
+                unitCustom.required = false;
+                unitCustom.value = "";
+                unitSelect.name = "Unit";
+                unitCustom.name = "Unit_Ignore";
+            }
+        });
+
+        categorySelect.addEventListener("change", function () {
+            if (this.value === "Khác") {
+                categoryCustom.style.display = "block";
+                categoryCustom.required = true;
+                categorySelect.name = "Category_Ignore";
+                categoryCustom.name = "Category";
+            } else {
+                categoryCustom.style.display = "none";
+                categoryCustom.required = false;
+                categoryCustom.value = "";
+                categorySelect.name = "Category";
+                categoryCustom.name = "Category_Ignore";
+            }
+        });
+    });
+</script>
+

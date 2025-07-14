@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Chọn rạp để xem tồn kho";
+    var cinemas = ViewBag.CinemaList as List<SelectListItem>; // 👈 ép kiểu danh sách
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary mb-4">🎬 Chọn rạp để xem tồn kho</h2>
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>#</th>
+                <th>Tên rạp</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (cinemas != null && cinemas.Any())
+            {
+                int index = 1;
+                foreach (var cinema in cinemas)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@cinema.Text</td>
+                        <td class="text-center">
+                            <form asp-action="StockByCinema" method="get" class="d-inline">
+                                <input type="hidden" name="cinemaId" value="@cinema.Value" />
+                                <button type="submit" class="btn btn-sm btn-info text-white">🔍 Xem tồn kho</button>
+                            </form>
+                        </td>
+                    </tr>
+                    index++;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center text-muted">Không có rạp nào để hiển thị.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SeatTypeModel>
+
+<h2>🎟️ Danh sách loại ghế</h2>
+
+<p><a class="btn btn-primary" asp-action="CreateSeatType">➕ Thêm loại ghế</a></p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên loại ghế</th>
+            <th>Giá</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var seat in Model)
+        {
+            <tr>
+                <td>@seat.TypeID</td>
+                <td>@seat.TypeName</td>
+                <td>@seat.Price.ToString("N0") đ</td>
+                <td>
+                    <a class="btn btn-sm btn-success" asp-action="EditSeatType" asp-route-id="@seat.TypeID">✏️ Sửa</a>
+                    <a class="btn btn-sm btn-info text-white" asp-action="Details" asp-route-id="@seat.TypeID">🔍 Chi tiết</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@seat.TypeID">🗑️ Xoá</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

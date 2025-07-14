@@ -1,0 +1,20 @@
+﻿@model IEnumerable<ItemStockViewModel>
+<h2>Tồn kho mặt hàng tại rạp đã chọn</h2>
+<table class="table">
+    <thead>
+        <tr><th>Tên</th><th>Đơn vị</th><th>SL/Đơn vị</th><th>Loại</th><th>Số lượng</th><th>Trạng thái</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ItemName</td>
+                <td>@item.Unit</td>
+                <td>@item.QuanlityPerUnit</td>
+                <td>@item.Category</td>
+                <td>@item.Quantity</td>
+                <td>@(item.IsActive ? "Hoạt động" : "Không hoạt động")</td>
+            </tr>
+        }
+    </tbody>
+</table>

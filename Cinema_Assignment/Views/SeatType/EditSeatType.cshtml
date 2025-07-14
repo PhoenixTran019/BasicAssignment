@@ -1,0 +1,21 @@
+﻿@model SeatTypeModel
+
+<h2>✏️ Chỉnh sửa loại ghế</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="TypeID" />
+    <div class="mb-2">
+        <label>Seat Name</label>
+        <input asp-for="TypeName" class="form-control" type="number" required />
+    </div>
+    <div class="mb-2">
+        <label>Giá</label>
+        <input asp-for="Price" class="form-control" type="number" step="1000" required />
+    </div>
+    <div class="mb-2">
+        <label>Description</label>
+        <input asp-for="Description" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+    <a asp-action="Index" class="btn btn-secondary">Huỷ</a>
+</form>

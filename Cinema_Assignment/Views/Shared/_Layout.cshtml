@@ -41,10 +41,18 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         @if (userType == "Employee" && userRole == 1)
                         {
-                            <li class="nav-item"><a class="nav-link" asp-controller="Cinema" asp-action="Index">Cinema></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Room" asp-action="Index">Phòng chiếu</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Movie" asp-action="Index">Phim</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Cinema" asp-action="Index">Cinemas</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Items" asp-action="Index">Items</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Showtime" asp-action="Index">Xuất chiếu</a></li>
+                            <li class="nav-item dropdown">
+                                <a class=" nav-link dropdown-toggle" href="#" id="itemsDropdow" role="button">
+                                    Rooms
+                                </a>
+                                <ul class="dropdown-menu"aria-labelledby="itemDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Rooms" asp-action="Index">Room Manage</a></li>
+                                    <li><a class="dropdown-item" asp-controller="SeatType" asp-action="Index">Seat Type</a></li>
+                                </ul>
+                            </li>
                         }
                         else
                         {
@@ -117,3 +125,10 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<style>
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0; /* fix hiện thị bị trễ */
+    }
+</style>

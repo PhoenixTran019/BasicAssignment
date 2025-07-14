@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ItemModel>
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">📦 Danh sách mặt hàng</h2>
+        <div>
+            <a class="btn btn-primary me-2" asp-action="CreateItems">➕ Thêm mặt hàng mới</a>
+            <a class="btn btn-outline-secondary" asp-action="SelectCinema">🔍 Xem tồn kho theo rạp</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover align-middle shadow-sm">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>Tên</th>
+                <th>Đơn vị</th>
+                <th>SL/Đơn vị</th>
+                <th>Loại</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ItemName</td>
+                    <td>@item.Unit</td>
+                    <td>@item.QuanlityPerUnit</td>
+                    <td>@item.Category</td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-success me-1" asp-action="EditItems" asp-route-id="@item.ItemID">✏️ Sửa</a>
+                        <a class="btn btn-sm btn-info text-white me-1" asp-action="DetailItems" asp-route-id="@item.ItemID">🔍 Chi tiết</a>
+                        <a class="btn btn-sm btn-danger" asp-action="DeleteItems" asp-route-id="@item.ItemID">🗑️ Xoá</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

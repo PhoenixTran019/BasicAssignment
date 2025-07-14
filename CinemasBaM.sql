@@ -131,6 +131,7 @@ Create Table SeatTypes
 	TypeID int Primary Key,
 	TypeName int, --1. Standard, 2.VIP
 	Price Decimal (18,2)
+	Decription nvarchar (50)
 );
 go
 
@@ -259,8 +260,6 @@ CREATE TABLE Receipts_Coupons
 );
 go
 
-
-
 Create Table Combos
 (
 	ComboID int Primary Key,
@@ -269,11 +268,8 @@ Create Table Combos
 	Description nvarchar (355),
 	Price decimal (18,2),
 	Image nvarchar (355)
-	FOREIGN KEY (CouponID) REFERENCES Coupons (CouponID)
 );
 go
-
-
 
 Create table ComboDetails
 (

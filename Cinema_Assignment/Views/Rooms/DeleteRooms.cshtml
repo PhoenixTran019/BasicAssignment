@@ -1,0 +1,19 @@
+﻿@model Cinema_Assignment.Models.RoomsModel
+
+@{
+    ViewBag.Title = "Xoá phòng";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-danger">🗑️ Xoá phòng</h2>
+
+    <p>Bạn có chắc chắn muốn xoá <strong>@Model.RoomName</strong> không?</p>
+
+    <form asp-action="DeleteRooms" method="post">
+        <input type="hidden" asp-for="RoomID" />
+        <input type="hidden" asp-for="CinemaID" />
+
+        <button type="submit" class="btn btn-danger">Xác nhận xoá</button>
+        <a asp-action="RoomOfCinema" asp-route-cinemaID="@Model.CinemaID" class="btn btn-secondary">Huỷ</a>
+    </form>
+</div>

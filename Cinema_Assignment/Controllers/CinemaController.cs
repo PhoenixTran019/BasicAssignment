@@ -63,23 +63,48 @@ namespace Cinema_Assignment.Controllers
         [HttpPost]
         public IActionResult Create(CinemaModel model)
         {
-            if (!IsAdmin()) return RedirectToAction("Login", "Auth");
+            if (!IsAdmin())
+                return RedirectToAction("Login", "Auth");
 
             using var conn = new SqlConnection(_connectionString);
             conn.Open();
+
+            // 1. Thêm Rạp
             var cmd = new SqlCommand(@"
-            INSERT INTO Cinemas (CinemaID, CinemaName, CinemaCode, Address, PhoneNumber)
-            VALUES (@id, @name, @code, @addr, @phone)", conn);
+        INSERT INTO Cinemas (CinemaID, CinemaName, CinemaCode, Address, PhoneNumber)
+        VALUES (@id, @name, @code, @addr, @phone)", conn);
 
             cmd.Parameters.AddWithValue("@id", model.CinemaID);
-            cmd.Parameters.AddWithValue("@name", model.CinemaName);
-            cmd.Parameters.AddWithValue("@code", model.CinemaCode);
-            cmd.Parameters.AddWithValue("@addr", model.Address);
+            cmd.Parameters.AddWithValue("@name", model.CinemaName ?? "");
+            cmd.Parameters.AddWithValue("@code", model.CinemaCode ?? "");
+            cmd.Parameters.AddWithValue("@addr", model.Address ?? "");
             cmd.Parameters.AddWithValue("@phone", model.PhoneNumber);
 
             cmd.ExecuteNonQuery();
+
+            // 2. Gán tất cả Item vào rạp mới trong Cinemas_ItemsStock
+            var itemCmd = new SqlCommand("SELECT ItemID FROM Items", conn);
+            var reader = itemCmd.ExecuteReader();
+            var itemIDs = new List<int>();
+            while (reader.Read())
+            {
+                itemIDs.Add((int)reader["ItemID"]);
+            }
+            reader.Close();
+
+            foreach (var itemId in itemIDs)
+            {
+                var insertStockCmd = new SqlCommand(@"
+            INSERT INTO Cinemas_ItemsStock (CinemaID, ItemID, Quantity, IsActive)
+            VALUES (@cinemaID, @itemID, 0, 1)", conn);
+                insertStockCmd.Parameters.AddWithValue("@cinemaID", model.CinemaID);
+                insertStockCmd.Parameters.AddWithValue("@itemID", itemId);
+                insertStockCmd.ExecuteNonQuery();
+            }
+
             return RedirectToAction("Index");
         }
+
 
         // GET: /Cinema/Edit/5
         public IActionResult Edit(int id)
@@ -131,7 +156,7 @@ namespace Cinema_Assignment.Controllers
             return RedirectToAction("Index");
         }
 
-        
+
         // GET: /Cinema/Delete/5
         public IActionResult Delete(int id)
         {
@@ -158,6 +183,7 @@ namespace Cinema_Assignment.Controllers
             return View(cinema);
         }
 
+
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
@@ -165,12 +191,20 @@ namespace Cinema_Assignment.Controllers
 
             using var conn = new SqlConnection(_connectionString);
             conn.Open();
+
+            // Xoá liên quan (nếu cần)
+            var deleteStockCmd = new SqlCommand("DELETE FROM Cinemas_ItemsStock WHERE CinemaID = @id", conn);
+            deleteStockCmd.Parameters.AddWithValue("@id", id);
+            deleteStockCmd.ExecuteNonQuery();
+
+            // Xoá chính rạp
             var cmd = new SqlCommand("DELETE FROM Cinemas WHERE CinemaID = @id", conn);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
 
             return RedirectToAction("Index");
         }
+
     }
 
 }

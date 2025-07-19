@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SeatLayoutDisplayModel>
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-success">🪑 Sơ đồ ghế - Phòng @ViewBag.RoomID (Chế độ kiểm tra)</h2>
+
+    <div class="d-flex flex-column">
+        @{
+            // Tạo map loại ghế theo từng hàng/cột
+            var seatMap = new Dictionary<string, (string TypeName, decimal Price)>();
+
+            foreach (var layout in Model)
+            {
+                for (char row = layout.StartRow; row <= layout.EndRow; row++)
+                {
+                    for (int col = layout.StartCol; col <= layout.EndCol; col++)
+                    {
+                        string key = $"{row}{col}";
+                        seatMap[key] = (layout.TypeName, layout.Price);
+                    }
+                }
+            }
+
+            var allRows = seatMap.Select(s => s.Key[0]).Distinct().OrderBy(r => r).ToList();
+            var allCols = seatMap.Select(s => int.Parse(s.Key.Substring(1))).Distinct().OrderBy(c => c).ToList();
+        }
+
+        @foreach (var row in allRows)
+        {
+            <div class="d-flex mb-1">
+                @foreach (var col in allCols)
+                {
+                    var key = $"{row}{col}";
+                    if (seatMap.ContainsKey(key))
+                    {
+                        var seat = seatMap[key];
+                        string btnClass = seat.TypeName switch
+                        {
+                            "VIP" => "btn btn-info btn-sm m-1",
+                            "Couple" => "btn btn-warning btn-sm m-1",
+                            _ => "btn btn-secondary btn-sm m-1"
+                        };
+
+                        <button type="button" class="@btnClass"
+                                onclick="showSeat('@row', @col, '@seat.TypeName', @seat.Price)">
+                            @row@col
+                        </button>
+                    }
+                    else
+                    {
+                        <div class="btn btn-light btn-sm m-1 disabled" style="opacity:0.4;">X</div>
+                    }
+                }
+            </div>
+        }
+    </div>
+
+    <a asp-action="RoomOfCinema" asp-route-cinemaID="@ViewBag.CinemaID" class="btn btn-secondary mt-3">⬅️ Quay lại</a>
+
+</div>
+
+<script>
+    function showSeat(row, col, type, price) {
+        alert(`Ghế ${row}${col}\nLoại: ${type}\nGiá: ${price.toLocaleString()} VND`);
+    }
+</script>

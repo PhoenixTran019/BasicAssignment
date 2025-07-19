@@ -1,0 +1,36 @@
+﻿@model IEnumerable<RoomsModel>
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-success">🏢 Danh sách phòng của rạp @ViewBag.CinemaID</h2>
+
+    <a asp-action="CreateRooms" asp-route-cinemaID="@ViewBag.CinemaID" class="btn btn-success mb-3">➕ Thêm phòng mới</a>
+
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>Tên phòng</th>
+                <th>Loại</th>
+                <th>Số ghế dự kiến</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var room in Model)
+            {
+                <tr>
+                    <td>@room.RoomName</td>
+                    <td>@room.RoomType</td>
+                    <td>@room.TotalSeat</td>
+                    <td>
+                        <a asp-action="EditRooms" asp-route-id="@room.RoomID" class="btn btn-warning btn-sm me-1">✏️ Sửa</a>
+                        <a asp-action="DeleteRooms" asp-route-id="@room.RoomID" class="btn btn-danger btn-sm me-1">🗑️ Xoá</a>
+                        <a asp-controller="SeatLayoutConfig" asp-action="Index" asp-route-roomId="@room.RoomID" class="btn btn-outline-secondary btn-sm me-1">Cấu hình Layout</a>
+                        <a asp-action="CheckLayout" asp-route-roomId="@room.RoomID" class="btn btn-outline-info btn-sm me-1">Kiểm tra Layout</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="SelectCinema" class="btn btn-secondary mt-3">⬅️ Quay lại chọn rạp</a>
+</div>

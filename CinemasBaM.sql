@@ -105,13 +105,21 @@ Create table Cinemas_Employees
 );
 go
 
-Create Table SeatLayoutConfigs
+CREATE TABLE SeatLayoutConfigs
 (
-	LayoutID int Primary key,
-	StartRow Char(1),
-	EndRow Char(1),
-	ColumnsPerRow int
+    LayoutID INT PRIMARY KEY,
+    RoomID INT,
+    StartRow CHAR(1),
+    EndRow CHAR(1),
+    StartCol INT,
+    EndCol INT,
+    SeatType INT,
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID),
+    FOREIGN KEY (SeatType) REFERENCES SeatTypes(TypeID)
 );
+
+drop table SeatLayoutConfigs
+
 go
 
 Create table Rooms
@@ -120,8 +128,7 @@ Create table Rooms
 	RoomName Nvarchar(50),
 	RoomType Nvarchar(50),
 	CinemaID int,
-	LayoutID int,
-	Foreign Key (LayoutID) References SeatLayoutConfigs (LayoutID),
+	TotalSeat int,
 	Foreign Key (CinemaID) References Cinemas (CinemaID)
 );
 go

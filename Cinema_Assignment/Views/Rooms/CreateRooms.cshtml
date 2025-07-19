@@ -1,0 +1,36 @@
+﻿@model Cinema_Assignment.Models.RoomsModel
+
+@{
+    ViewBag.Title = "Thêm phòng mới";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">➕ Thêm phòng mới cho rạp @Model.CinemaID</h2>
+
+    <form asp-action="CreateRooms" method="post" class="border p-4 shadow-sm rounded">
+        <input type="hidden" asp-for="CinemaID" />
+
+        <div class="mb-3">
+            <label>Mã phòng:</label>
+            <input asp-for="RoomID" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Tên phòng:</label>
+            <input asp-for="RoomName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Loại phòng:</label>
+            <input asp-for="RoomType" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Số ghế dự kiến:</label>
+            <input asp-for="TotalSeat" class="form-control" type="number" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Lưu phòng</button>
+        <a asp-action="RoomOfCinema" asp-route-cinemaID="@Model.CinemaID" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>

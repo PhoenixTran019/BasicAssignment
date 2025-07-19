@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SeatLayoutConfigModel>
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">📐 Cấu hình Layout - Phòng @ViewBag.RoomID</h2>
+
+    <a asp-action="Create" asp-route-roomId="@ViewBag.RoomID" class="btn btn-success mb-3">➕ Thêm khu vực ghế</a>
+
+    <table class="table table-bordered shadow-sm">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>Hàng</th>
+                <th>Cột</th>
+                <th>Loại ghế</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.StartRow → @item.EndRow</td>
+                    <td>@item.StartCol → @item.EndCol</td>
+                    <td>@item.SeatTypeID</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.LayoutID" class="btn btn-warning btn-sm">Sửa</a>
+                        <a asp-action="Delete" asp-route-id="@item.LayoutID" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-controller="Rooms" asp-action="RoomOfCinema" asp-route-cinemaID="@ViewBag.CinemaID" class="btn btn-secondary">⬅️ Quay lại</a>
+
+</div>

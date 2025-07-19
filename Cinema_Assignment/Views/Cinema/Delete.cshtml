@@ -1,0 +1,22 @@
+﻿@model Cinema_Assignment.Models.CinemaModel
+
+@{
+    ViewBag.Title = "Xoá Rạp";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger">⚠️ Xác nhận xoá rạp</h2>
+
+    <div class="alert alert-warning">
+        <p>Bạn có chắc chắn muốn xoá rạp <strong>@Model.CinemaName</strong> không?</p>
+        <p>Mã rạp: <strong>@Model.CinemaCode</strong></p>
+        <p>Địa chỉ: @Model.Address</p>
+        <p>Số điện thoại: @Model.PhoneNumber</p>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" name="id" value="@Model.CinemaID" />
+        <button type="submit" class="btn btn-danger">🗑️ Xoá</button>
+        <a asp-action="Index" class="btn btn-secondary">❌ Huỷ</a>
+    </form>
+</div>

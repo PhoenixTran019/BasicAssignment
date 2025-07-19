@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Cinema_Assignment.Models.CinemaModel>
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">🎥 Chọn rạp để quản lý phòng</h2>
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>Mã rạp</th>
+                <th>Tên rạp</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var cinema in Model)
+            {
+                <tr>
+                    <td>@cinema.CinemaID</td>
+                    <td>@cinema.CinemaName</td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="RoomOfCinema" asp-route-cinemaID="@cinema.CinemaID">Quản lý phòng</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -32,6 +32,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Cinema/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Cinema/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -70,6 +74,42 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Items/StockByCinema.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbXNcU3RvY2tCeUNpbmVtYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Rooms/CheckLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcQ2hlY2tMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Rooms/CreateRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcQ3JlYXRlUm9vbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Rooms/DeleteRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcRGVsZXRlUm9vbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Rooms/EditRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcRWRpdFJvb21zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Rooms/RoomOfCinema.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcUm9vbU9mQ2luZW1hLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Rooms/SelectCinema.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcU2VsZWN0Q2luZW1hLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/SeatLayoutConfig/CreateSeatLayoutConfig.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhdExheW91dENvbmZpZ1xDcmVhdGVTZWF0TGF5b3V0Q29uZmlnLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/SeatLayoutConfig/EditSeatLayoutConfig.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhdExheW91dENvbmZpZ1xFZGl0U2VhdExheW91dENvbmZpZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/SeatLayoutConfig/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhdExheW91dENvbmZpZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/SeatType/CreateSeatType.cshtml]

@@ -482,6 +482,15 @@ CREATE TABLE Foods_CinemasStock (
 );
 go
 
+	CREATE TABLE Foods_Items (
+    FoodID INT,
+    ItemID INT,
+    QuantityPerFood INT NOT NULL, -- số lượng item dùng để tạo ra 1 food
+    PRIMARY KEY (FoodID, ItemID),
+    FOREIGN KEY (FoodID) REFERENCES Foods(FoodID),
+    FOREIGN KEY (ItemID) REFERENCES Items(ItemID)
+);
+GO
 
 
 CREATE TRIGGER trg_DecreaseFoodStock
@@ -563,6 +572,20 @@ END;
 GO
 
 USE master;
+GO
+
+CREATE TRIGGER trg_DecreaseItemStock_Disposal
+ON ItemDisposals
+AFTER INSERT
+AS
+BEGIN
+    UPDATE cis
+    SET 
+        cis.Quantity = cis.Quantity - i.Quantity,
+        cis.LastUpdated = GETDATE()
+    FROM Cinemas_ItemsStock cis
+    JOIN inserted i ON i.ItemID = cis.ItemID AND i.CinemaID = cis.CinemaID;
+END;
 GO
 
 -- Đặt database về chế độ single user để kill kết nối

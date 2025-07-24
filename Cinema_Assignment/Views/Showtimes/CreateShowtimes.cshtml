@@ -1,0 +1,47 @@
+﻿@model Cinema_Assignment.Models.ShowTimeModel
+
+<h2>➕ Thêm Suất Chiếu</h2>
+
+<form asp-action="CreateShowTimes" method="post">
+
+    <div class="form-group">
+        <label>Mã Suất Chiếu (ID)</label>
+        <input asp-for="ShowTimeID" class="form-control" readonly />
+        <input type="hidden" asp-for="ShowTimeID" />
+    </div>
+
+    <div class="form-group">
+        <label>Chọn phim</label>
+        <select id="MovieSelect" name="MovieID" class="form-control" onchange="CalculateEndTime()">
+            @foreach (var movie in ViewBag.Movies as List<MovieModel>)
+            {
+                <option value="@movie.MovieID" data-duration="@movie.Duration">@movie.Title</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Thời gian bắt đầu</label>
+        <input type="datetime-local" id="StartTime" name="StartTime" class="form-control" onchange="CalculateEndTime()" />
+    </div>
+
+    <div class="form-group">
+        <label>Thời gian kết thúc (tự tính)</label>
+        <input type="datetime-local" id="EndTime" name="EndTime" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Thêm mới</button>
+    <a asp-action="Index" asp-route-roomId="@Model.RoomID" class="btn btn-secondary mt-3">Quay lại</a>
+</form>
+
+<script>
+    function CalculateEndTime() {
+        var movieSelect = document.getElementById("MovieSelect");
+        var duration = parseInt(movieSelect.options[movieSelect.selectedIndex].getAttribute("data-duration"));
+        var startTime = new Date(document.getElementById("StartTime").value);
+        if (isNaN(startTime.getTime())) return;
+
+        var endTime = new Date(startTime.getTime() + duration * 60000);
+        document.getElementById("EndTime").value = endTime.toISOString().slice(0,16);
+    }
+</script>

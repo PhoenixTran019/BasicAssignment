@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Cinema_Assignment.Models.ShowTimeModel>
+
+<h2>🎥 Quản Lý Lịch Chiếu Toàn Hệ Thống</h2>
+
+<a asp-action="SelectCinemas" class="btn btn-success mb-3">➕ Thêm Suất Chiếu Mới</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Rạp</th>
+            <th>Phòng</th>
+            <th>Phim</th>
+            <th>Bắt đầu</th>
+            <th>Kết thúc</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var show in Model)
+        {
+            <tr>
+                <td>@show.CinemaName</td>
+                <td>@show.RoomName</td>
+                <td>@show.MovieName</td>
+                <td>@show.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@show.EndTime.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="EditShowtimes" asp-route-id="@show.ShowTimeID" class="btn btn-primary btn-sm">Sửa</a>
+                    <a asp-action="DeleteShowtimes" asp-route-id="@show.ShowTimeID" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

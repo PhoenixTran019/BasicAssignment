@@ -1,0 +1,55 @@
+﻿@model Cinema_Assignment.Models.EmployeesModel
+@{
+    ViewBag.Title = "👤 Thông tin chi tiết nhân viên";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="card p-4 shadow-sm">
+    <dl class="row">
+        <dt class="col-sm-3">Mã nhân viên</dt>
+        <dd class="col-sm-9">@Model.EmployeeId</dd>
+
+        <dt class="col-sm-3">Họ và tên</dt>
+        <dd class="col-sm-9">@Model.FirstName @Model.LastName</dd>
+
+        <dt class="col-sm-3">Giới tính</dt>
+        <dd class="col-sm-9">@Model.Gender</dd>
+
+        <dt class="col-sm-3">Ngày sinh</dt>
+        <dd class="col-sm-9">@Model.DOB.ToString("dd/MM/yyyy")</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+
+        <dt class="col-sm-3">Số điện thoại</dt>
+        <dd class="col-sm-9">@Model.PhoneNumber</dd>
+
+        <dt class="col-sm-3">Chức vụ</dt>
+        <dd class="col-sm-9">
+            @{
+                string role = Model.Roll switch
+                {
+                    1 => "Admin (Office, Supervisor, ...)",
+                    2 => "Cinema Protocol",
+                    3 => "Team Leader",
+                    4 => "Team Member",
+                    _ => "Không xác định"
+                };
+            }
+            @role
+        </dd>
+
+        <dt class="col-sm-3">Chi tiết công việc</dt>
+        <dd class="col-sm-9">@Model.Detail</dd>
+
+        <dt class="col-sm-3">Địa chỉ</dt>
+        <dd class="col-sm-9">@Model.Address</dd>
+
+        <dt class="col-sm-3">Ngày nhận việc</dt>
+        <dd class="col-sm-9">@Model.JobAcceptanceDate.ToString("dd/MM/yyyy HH:mm")</dd>
+    </dl>
+
+    <a asp-action="EditEmployees" asp-route-id="@Model.EmployeeId" class="btn btn-primary">✏️ Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">⬅️ Quay lại danh sách</a>
+</div>

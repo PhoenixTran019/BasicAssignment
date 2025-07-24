@@ -8,6 +8,6 @@
         public char EndRow { get; set; }
         public int StartCol { get; set; }
         public int EndCol { get; set; }
-        public int SeatTypeID { get; set; }
+        public int SeatType { get; set; }
     }
 }

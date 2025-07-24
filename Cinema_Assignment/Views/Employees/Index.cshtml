@@ -1,0 +1,68 @@
+﻿@model List<Cinema_Assignment.Models.EmployeesModel>
+
+@{
+    ViewBag.Title = "📋 Danh sách nhân viên";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a asp-action="CreateEmployees" class="btn btn-success">➕ Thêm nhân viên</a>
+</p>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Hiện chưa có nhân viên nào trong hệ thống.</div>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Mã NV</th>
+                <th>Họ tên</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Email</th>
+                <th>SĐT</th>
+                <th>Chức vụ</th>
+                <th>Chi tiết</th>
+                <th>Ngày nhận việc</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.EmployeeId</td>
+                    <td>@emp.LastName @emp.FirstName</td>
+                    <td>@emp.Gender</td>
+                    <td>@emp.DOB.ToString("dd/MM/yyyy")</td>
+                    <td>@emp.Email</td>
+                    <td>@emp.PhoneNumber</td>
+                    <td>
+                        @{
+                            string role = emp.Roll switch
+                            {
+                                1 => "Admin",
+                                2 => "Cinema Protocol",
+                                3 => "Team Leader",
+                                4 => "Team Member",
+                                _ => "Không xác định"
+                            };
+                        }
+                        @role
+                    </td>
+                    <td>@emp.Detail</td>
+                    <td>@emp.JobAcceptanceDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <a asp-action="EditEmployees" asp-route-id="@emp.EmployeeId" class="btn btn-sm btn-primary">✏️ Sửa</a>
+                        <a asp-action="DetailEmployees" asp-route-id="@emp.EmployeeId" class="btn btn-sm btn-primary">Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@emp.EmployeeId" class="btn btn-sm btn-danger">🗑️ Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

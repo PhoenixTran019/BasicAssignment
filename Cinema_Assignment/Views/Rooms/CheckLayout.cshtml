@@ -1,65 +1,144 @@
-﻿@model IEnumerable<SeatLayoutDisplayModel>
+﻿@model IEnumerable<Cinema_Assignment.Models.SeatLayoutDisplayModel>
+
+@{
+    ViewBag.Title = "Kiểm tra sơ đồ ghế";
+    var layouts = Model.ToList();
+    var minRow = layouts.Min(l => l.StartRow);
+    var maxRow = layouts.Max(l => l.EndRow);
+    var maxCol = layouts.Max(l => l.EndCol);
+}
+
+<style>
+    .seat-grid {
+        display: grid;
+        grid-template-columns: repeat( @maxCol, 45px);
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .seat {
+        width: 45px;
+        height: 45px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 45px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .standard {
+        background-color: #ccc;
+    }
+
+    .vip {
+        background-color: #f9d923;
+    }
+
+    .selected {
+        background-color: #00cc44 !important;
+        color: #fff;
+    }
+
+    .legend {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .legend-color {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        border: 1px solid #333;
+    }
+</style>
 
 <div class="container mt-4">
-    <h2 class="mb-4 text-success">🪑 Sơ đồ ghế - Phòng @ViewBag.RoomID (Chế độ kiểm tra)</h2>
+    <h2 class="text-primary">🪑 Kiểm tra sơ đồ ghế - Phòng @ViewBag.RoomID</h2>
 
-    <div class="d-flex flex-column">
-        @{
-            // Tạo map loại ghế theo từng hàng/cột
-            var seatMap = new Dictionary<string, (string TypeName, decimal Price)>();
+    <div class="legend">
+        <div class="legend-item"><div class="legend-color" style="background:#ccc;"></div> Standard</div>
+        <div class="legend-item"><div class="legend-color" style="background:#f9d923;"></div> VIP</div>
+        <div class="legend-item"><div class="legend-color" style="background:#00cc44;"></div> Ghế đã chọn</div>
+    </div>
 
-            foreach (var layout in Model)
-            {
-                for (char row = layout.StartRow; row <= layout.EndRow; row++)
+    @for (char row = minRow; row <= maxRow; row++)
+    {
+        <div class="d-flex align-items-center mb-2">
+            <strong style="width:30px;">@row</strong>
+            <div class="seat-grid">
+                @for (int col = 1; col <= maxCol; col++)
                 {
-                    for (int col = layout.StartCol; col <= layout.EndCol; col++)
+                    var seatCode = $"{row}{col}";
+                    var layoutForSeat = layouts.FirstOrDefault(l =>
+                    row >= l.StartRow && row <= l.EndRow &&
+                    col >= l.StartCol && col <= l.EndCol
+                    );
+
+                    if (layoutForSeat != null)
                     {
-                        string key = $"{row}{col}";
-                        seatMap[key] = (layout.TypeName, layout.Price);
-                    }
-                }
-            }
+                        var seatClass = layoutForSeat.TypeName == "Standard" ? "seat standard" : "seat vip";
 
-            var allRows = seatMap.Select(s => s.Key[0]).Distinct().OrderBy(r => r).ToList();
-            var allCols = seatMap.Select(s => int.Parse(s.Key.Substring(1))).Distinct().OrderBy(c => c).ToList();
-        }
-
-        @foreach (var row in allRows)
-        {
-            <div class="d-flex mb-1">
-                @foreach (var col in allCols)
-                {
-                    var key = $"{row}{col}";
-                    if (seatMap.ContainsKey(key))
-                    {
-                        var seat = seatMap[key];
-                        string btnClass = seat.TypeName switch
-                        {
-                            "VIP" => "btn btn-info btn-sm m-1",
-                            "Couple" => "btn btn-warning btn-sm m-1",
-                            _ => "btn btn-secondary btn-sm m-1"
-                        };
-
-                        <button type="button" class="@btnClass"
-                                onclick="showSeat('@row', @col, '@seat.TypeName', @seat.Price)">
-                            @row@col
-                        </button>
+                        <div class="@seatClass"
+                             data-seat="@seatCode"
+                             data-type="@layoutForSeat.TypeName"
+                             data-price="@layoutForSeat.Price">
+                            @seatCode
+                        </div>
                     }
                     else
                     {
-                        <div class="btn btn-light btn-sm m-1 disabled" style="opacity:0.4;">X</div>
+                        <div class="seat" style="visibility:hidden;">-</div>
                     }
                 }
             </div>
-        }
-    </div>
+        </div>
+    }
 
-    <a asp-action="RoomOfCinema" asp-route-cinemaID="@ViewBag.CinemaID" class="btn btn-secondary mt-3">⬅️ Quay lại</a>
-
+    <h5>Ghế đã chọn:</h5>
+    <p id="selected-seats">Chưa chọn ghế nào.</p>
+    <p id="total-price">Tổng tiền: 0đ</p>
 </div>
 
 <script>
-    function showSeat(row, col, type, price) {
-        alert(`Ghế ${row}${col}\nLoại: ${type}\nGiá: ${price.toLocaleString()} VND`);
+    const selectedSeats = [];
+
+    document.querySelectorAll('.seat').forEach(seat => {
+        seat.addEventListener('click', function () {
+            if (this.style.visibility === 'hidden') return;
+
+            const code = this.getAttribute('data-seat');
+            const price = parseFloat(this.getAttribute('data-price'));
+
+            if (this.classList.contains('selected')) {
+                this.classList.remove('selected');
+                selectedSeats.splice(selectedSeats.findIndex(s => s.code === code), 1);
+            } else {
+                this.classList.add('selected');
+                selectedSeats.push({ code: code, price: price });
+            }
+
+            updateSummary();
+        });
+    });
+
+    function updateSummary() {
+        if (selectedSeats.length === 0) {
+            document.getElementById('selected-seats').innerText = "Chưa chọn ghế nào.";
+            document.getElementById('total-price').innerText = "Tổng tiền: 0đ";
+            return;
+        }
+
+        const names = selectedSeats.map(s => s.code).join(', ');
+        const total = selectedSeats.reduce((sum, s) => sum + s.price, 0);
+
+        document.getElementById('selected-seats').innerText = "Ghế: " + names;
+        document.getElementById('total-price').innerText = "Tổng tiền: " + total.toLocaleString('vi-VN') + "đ";
     }
 </script>

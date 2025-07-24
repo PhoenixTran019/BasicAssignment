@@ -1,0 +1,100 @@
+﻿@model Cinema_Assignment.Models.EmployeesModel
+@{
+    ViewBag.Title = "➕ Thêm nhân viên";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form asp-action="CreateEmployees" method="post" onsubmit="return validateID()">
+    <div class="form-group">
+        <label asp-for="Roll"></label>
+        <select asp-for="Roll" class="form-control" id="RollSelect" onchange="onRoleChange()">
+            <option value="">-- Chọn chức vụ --</option>
+            <option value="1">Admin (Office, Supervisor, ...)</option>
+            <option value="2">Cinema Protocol</option>
+            <option value="3">Team Leader</option>
+            <option value="4">Team Member</option>
+        </select>
+    </div>
+
+    <div id="formFields" style="display:none;">
+        <div class="form-group">
+            <label asp-for="EmployeeId"></label>
+            <input asp-for="EmployeeId" class="form-control" id="empIDInput" placeholder="Mã nhân viên theo vai trò Admin 4 só, Protocol 5 số, Team 6 số" />
+            <small id="idError" class="text-danger d-none">❌ Mã nhân viên không đúng định dạng!</small>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Gender"></label>
+            <select asp-for="Gender" class="form-control">
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DOB"></label>
+            <input asp-for="DOB" type="date" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Detail"></label>
+            <input asp-for="Detail" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Lưu</button>
+        <a asp-action="Index" class="btn btn-secondary mt-3">Quay lại</a>
+    </div>
+</form>
+
+<script>
+    function onRoleChange() {
+        const roll = document.getElementById("RollSelect").value;
+        const fields = document.getElementById("formFields");
+        fields.style.display = roll ? "block" : "none";
+    }
+
+    function validateID() {
+        const roll = document.getElementById("RollSelect").value;
+        const id = document.getElementById("empIDInput").value.trim();
+        const error = document.getElementById("idError");
+
+        let requiredLength = 0;
+        if (roll == "1") requiredLength = 4;
+        else if (roll == "2") requiredLength = 5;
+        else if (roll == "3" || roll == "4") requiredLength = 6;
+
+        if (id.length !== requiredLength || isNaN(id)) {
+            error.classList.remove("d-none");
+            return false;
+        }
+
+        error.classList.add("d-none");
+        return true;
+    }
+</script>

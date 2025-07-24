@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Cinema_Assignment.Models.MovieModel>
+
+@{
+    ViewBag.Title = "Danh sách phim";
+}
+
+<h2>🎬 Danh sách Phim</h2>
+<a asp-action="CreateMovies" class="btn btn-success mb-3">➕ Thêm Phim</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Tiêu đề</th>
+            <th>Thời lượng (phút)</th>
+            <th>Thể loại</th>
+            <th>Độ tuổi yêu cầu</th>
+            <th>Ngày phát hành</th>
+            <th>Ảnh</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Duration</td>
+                <td>@movie.Genre</td>
+                <td>@movie.AgeRequest</td>
+                <td>@movie.ReleaseDate.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(movie.Image))
+                    {
+                        <img src="@movie.Image" width="100" />
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" asp-action="EditMovies" asp-route-id="@movie.MovieID">Sửa</a>
+                    <a class="btn btn-danger btn-sm" asp-action="DeleteMovies" asp-route-id="@movie.MovieID">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

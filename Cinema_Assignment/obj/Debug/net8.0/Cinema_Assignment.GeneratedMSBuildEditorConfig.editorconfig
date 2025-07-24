@@ -44,6 +44,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Employees/CreateEmployees.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXENyZWF0ZUVtcGxveWVlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Employees/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Employees/DetailEmployees.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXERldGFpbEVtcGxveWVlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Employees/EditEmployees.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEVkaXRFbXBsb3llZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Employees/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -76,6 +96,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbXNcU3RvY2tCeUNpbmVtYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Movies/CreateMovies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXENyZWF0ZU1vdmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Movies/DeleteMovies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXERlbGV0ZU1vdmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Movies/EditMovies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEVkaXRNb3ZpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Movies/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Rooms/CheckLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcQ2hlY2tMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -100,12 +136,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcU2VsZWN0Q2luZW1hLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Visual Project/Assignment/Cinema_Assignment/Views/SeatLayoutConfig/CreateSeatLayoutConfig.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhdExheW91dENvbmZpZ1xDcmVhdGVTZWF0TGF5b3V0Q29uZmlnLmNzaHRtbA==
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/SeatLayoutConfig/CreateLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhdExheW91dENvbmZpZ1xDcmVhdGVMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Visual Project/Assignment/Cinema_Assignment/Views/SeatLayoutConfig/EditSeatLayoutConfig.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhdExheW91dENvbmZpZ1xFZGl0U2VhdExheW91dENvbmZpZy5jc2h0bWw=
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/SeatLayoutConfig/EditLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhdExheW91dENvbmZpZ1xFZGl0TGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/SeatLayoutConfig/Index.cshtml]
@@ -134,6 +170,34 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Showtimes/CreateShowtimes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvd3RpbWVzXENyZWF0ZVNob3d0aW1lcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Showtimes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvd3RpbWVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Showtimes/EditShowtimes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvd3RpbWVzXEVkaXRTaG93dGltZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Showtimes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvd3RpbWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Showtimes/IndexAllShowTimes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvd3RpbWVzXEluZGV4QWxsU2hvd1RpbWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Showtimes/SelectCinemas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvd3RpbWVzXFNlbGVjdENpbmVtYXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Showtimes/SelectRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvd3RpbWVzXFNlbGVjdFJvb21zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/_ViewImports.cshtml]

@@ -1,0 +1,100 @@
+﻿@model Cinema_Assignment.Models.MovieModel
+
+@{
+    ViewBag.Title = "Sửa phim";
+}
+
+<h2>✏️ Sửa Thông Tin Phim</h2>
+
+<form asp-action="EditMovies" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="MovieID" />
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Duration"></label>
+        <input asp-for="Duration" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Thể loại</label>
+        <select id="GenreSelect" name="Genre" class="form-control" onchange="CheckOtherGenre()">
+            @foreach (var genre in ViewBag.Genres as List<string>)
+            {
+                if (Model.Genre == genre)
+                {
+                    @:
+                    <option value="@genre" selected="selected">@genre</option>
+                }
+                else
+                {
+                    @:
+                    <option value="@genre">@genre</option>
+                }
+            }
+        </select>
+
+        <input type="text" id="OtherGenreInput" name="OtherGenre" class="form-control mt-2" placeholder="Nhập thể loại khác" style="display:none;" />
+    </div>
+    <div class="form-group3">
+        <label>Độ tuổi yêu cầu</label>
+        <input asp-for="AgeRequest" maxlength="1" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReleaseDate"></label>
+        <input asp-for="ReleaseDate" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Ảnh hiện tại:</label><br />
+        @if (!string.IsNullOrEmpty(Model.Image))
+        {
+            <img src="@Model.Image" width="100" />
+        }
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageFile">Thay ảnh mới</label>
+        <input asp-for="ImageFile" type="file" class="form-control-file" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Quay lại</a>
+</form>
+
+<script>
+    function CheckOtherGenre() {
+        var selected = document.getElementById("GenreSelect").value;
+        var otherInput = document.getElementById("OtherGenreInput");
+
+        if (selected === "Khác") {
+            otherInput.style.display = "block";
+        } else {
+            otherInput.style.display = "none";
+            otherInput.value = "";
+        }
+    }
+
+    window.onload = function () {
+        CheckOtherGenre();
+
+        var currentGenre = @Html.Raw(Json.Serialize(Model.Genre));
+        var exists = false;
+
+        document.querySelectorAll("#GenreSelect option").forEach(opt => {
+            if (opt.value === currentGenre) {
+                exists = true;
+            }
+        });
+
+        if (!exists) {
+            document.getElementById("GenreSelect").value = "Khác";
+            document.getElementById("OtherGenreInput").style.display = "block";
+            document.getElementById("OtherGenreInput").value = currentGenre;
+        }
+    }
+</script>

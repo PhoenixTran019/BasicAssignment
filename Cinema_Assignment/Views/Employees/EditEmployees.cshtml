@@ -1,0 +1,66 @@
+﻿@model Cinema_Assignment.Models.EmployeesModel
+@{
+    ViewBag.Title = "✏️ Sửa thông tin nhân viên";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form asp-action="EditEmployees" method="post">
+    <input type="hidden" asp-for="EmployeeId" />
+
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" class="form-control">
+            <option value="Nam" selected="@(Model.Gender == "Nam")">Nam</option>
+            <option value="Nữ" selected="@(Model.Gender == "Nữ")">Nữ</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DOB"></label>
+        <input asp-for="DOB" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Roll"></label>
+        <select asp-for="Roll" class="form-control">
+            <option value="1" selected="@(Model.Roll == 1)">Admin (Office, Supervisor, ...)</option>
+            <option value="2" selected="@(Model.Roll == 2)">Cinema Protocol</option>
+            <option value="3" selected="@(Model.Roll == 3)">Team Leader</option>
+            <option value="4" selected="@(Model.Roll == 4)">Team Member</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Detail"></label>
+        <input asp-for="Detail" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Quay lại</a>
+</form>

@@ -1,35 +1,36 @@
-﻿@model IEnumerable<SeatLayoutConfigModel>
+﻿@model IEnumerable<Cinema_Assignment.Models.SeatLayoutConfigModel>
 
-<div class="container mt-5">
-    <h2 class="mb-4 text-primary">📐 Cấu hình Layout - Phòng @ViewBag.RoomID</h2>
+<div class="container mt-4">
+    <h2 class="text-primary">🪑 Cấu hình sơ đồ ghế cho phòng @ViewBag.RoomID</h2>
 
-    <a asp-action="Create" asp-route-roomId="@ViewBag.RoomID" class="btn btn-success mb-3">➕ Thêm khu vực ghế</a>
+    <a asp-action="CreateLayout" asp-route-roomId="@ViewBag.RoomID" class="btn btn-success mb-3">➕ Thêm khu vực ghế</a>
 
-    <table class="table table-bordered shadow-sm">
+    <table class="table table-bordered">
         <thead class="table-dark text-center">
             <tr>
-                <th>Hàng</th>
+                <th>Khu vực</th>
                 <th>Cột</th>
                 <th>Loại ghế</th>
                 <th>Thao tác</th>
             </tr>
         </thead>
         <tbody class="text-center">
-            @foreach (var item in Model)
+            @foreach (var l in Model)
             {
                 <tr>
-                    <td>@item.StartRow → @item.EndRow</td>
-                    <td>@item.StartCol → @item.EndCol</td>
-                    <td>@item.SeatTypeID</td>
+                    <td>@l.StartRow → @l.EndRow</td>
+                    <td>@l.StartCol → @l.EndCol</td>
+                    <td>@l.SeatType</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.LayoutID" class="btn btn-warning btn-sm">Sửa</a>
-                        <a asp-action="Delete" asp-route-id="@item.LayoutID" class="btn btn-danger btn-sm">Xóa</a>
+                        <a asp-action="EditLayout" asp-route-layoutId="@l.LayoutID" class="btn btn-warning btn-sm">✏️</a>
+                        <a asp-action="DeleteLayout" asp-route-layoutId="@l.LayoutID" asp-route-roomId="@l.RoomID" class="btn btn-danger btn-sm">🗑️</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 
-    <a asp-controller="Rooms" asp-action="RoomOfCinema" asp-route-cinemaID="@ViewBag.CinemaID" class="btn btn-secondary">⬅️ Quay lại</a>
+    <a asp-controller="Rooms" asp-action="RoomOfCinema" asp-route-cinemaID="@ViewBag.CinemaID" class="btn btn-secondary">⬅️ Quay lại rạp</a>
+
 
 </div>

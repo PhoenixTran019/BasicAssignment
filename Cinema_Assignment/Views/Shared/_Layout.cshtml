@@ -43,14 +43,24 @@
                         {
                             <li class="nav-item"><a class="nav-link" asp-controller="Cinema" asp-action="Index">Cinemas</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Items" asp-action="Index">Items</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Showtime" asp-action="Index">Xuất chiếu</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Movies" asp-action="Index">Movies</a></li>
                             <li class="nav-item dropdown">
                                 <a class=" nav-link dropdown-toggle" href="#" id="itemsDropdow" role="button">
                                     Rooms
                                 </a>
                                 <ul class="dropdown-menu"aria-labelledby="itemDropdown">
                                     <li><a class="dropdown-item" asp-controller="Rooms" asp-action="SelectCinema">Room Manage</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Showtimes" asp-action="IndexAllShowTimes">Showtime Manage</a></li>
                                     <li><a class="dropdown-item" asp-controller="SeatType" asp-action="Index">Seat Type</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class=" nav-link dropdown-toggle" href="#" id="itemsDropdow" role="button">
+                                    Teams
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="itemDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Employees" asp-action="Index">Employees Manage</a></li>
+                                    
                                 </ul>
                             </li>
                         }

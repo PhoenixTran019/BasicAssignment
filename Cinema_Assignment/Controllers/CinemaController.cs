@@ -11,17 +11,42 @@ namespace Cinema_Assignment.Controllers
     
     public class CinemaController : Controller
     {
-        private readonly string _connectionString;
+        private readonly string connectionString;
 
         public CinemaController(IConfiguration config)
         {
-                        _connectionString = config.GetConnectionString("DefaultConnection");
+           connectionString = config.GetConnectionString("DefaultConnection");
         }
 
         private bool IsAdmin()
         {
             return HttpContext.Session.GetString("UserType") == "Employee" && HttpContext.Session.GetInt32("UserRoll")==1;
         }
+
+        public IActionResult SelectCinema()
+        {
+            List<CinemaModel> cinemas = new List<CinemaModel>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT * FROM Cinemas";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    cinemas.Add(new CinemaModel
+                    {
+                        CinemaID = (int)reader["CinemaID"],
+                        CinemaName = reader["Name"].ToString()
+                    });
+                }
+            }
+
+            return View(cinemas);
+        }
+
 
         public IActionResult Index()
         {
@@ -32,7 +57,7 @@ namespace Cinema_Assignment.Controllers
             }
 
             List<CinemaModel> cinemas = new();
-            using var conn = new SqlConnection(_connectionString);
+            using var conn = new SqlConnection(connectionString);
             conn.Open();
             var cmd = new SqlCommand("SELECT * FROM Cinemas", conn);
             var reader = cmd.ExecuteReader();
@@ -66,7 +91,7 @@ namespace Cinema_Assignment.Controllers
             if (!IsAdmin())
                 return RedirectToAction("Login", "Auth");
 
-            using var conn = new SqlConnection(_connectionString);
+            using var conn = new SqlConnection(connectionString);
             conn.Open();
 
             // 1. Thêm Rạp
@@ -112,7 +137,7 @@ namespace Cinema_Assignment.Controllers
             if (!IsAdmin()) return RedirectToAction("Login", "Auth");
 
             CinemaModel cinema = null;
-            using var conn = new SqlConnection(_connectionString);
+            using var conn = new SqlConnection(connectionString);
             conn.Open();
             var cmd = new SqlCommand("SELECT * FROM Cinemas WHERE CinemaID = @id", conn);
             cmd.Parameters.AddWithValue("@id", id);
@@ -139,7 +164,7 @@ namespace Cinema_Assignment.Controllers
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Auth");
 
-            using var conn = new SqlConnection(_connectionString);
+            using var conn = new SqlConnection(connectionString);
             conn.Open();
             var cmd = new SqlCommand(@"
             UPDATE Cinemas
@@ -163,7 +188,7 @@ namespace Cinema_Assignment.Controllers
             if (!IsAdmin()) return RedirectToAction("Login", "Auth");
 
             CinemaModel cinema = null;
-            using var conn = new SqlConnection(_connectionString);
+            using var conn = new SqlConnection(connectionString);
             conn.Open();
             var cmd = new SqlCommand("SELECT * FROM Cinemas WHERE CinemaID = @id", conn);
             cmd.Parameters.AddWithValue("@id", id);
@@ -189,7 +214,7 @@ namespace Cinema_Assignment.Controllers
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Auth");
 
-            using var conn = new SqlConnection(_connectionString);
+            using var conn = new SqlConnection(connectionString);
             conn.Open();
 
             // Xoá liên quan (nếu cần)

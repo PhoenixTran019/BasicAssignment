@@ -1,0 +1,41 @@
+﻿@model Cinema_Assignment.Models.SeatLayoutConfigModel
+
+@{
+    ViewBag.Title = "Thêm khu vực ghế";
+}
+
+<div class="container mt-4">
+    <h2>➕ Thêm khu vực ghế cho phòng @Model.RoomID</h2>
+
+    <form asp-action="CreateLayout" method="post">
+        <div class="mb-3">
+            <label>Mã Layout</label>
+            <input asp-for="LayoutID" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Hàng bắt đầu</label>
+            <input asp-for="StartRow" maxlength="1" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Hàng kết thúc</label>
+            <input asp-for="EndRow" maxlength="1" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Cột bắt đầu</label>
+            <input asp-for="StartCol" type="number" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Cột kết thúc</label>
+            <input asp-for="EndCol" type="number" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Loại ghế</label>
+            <select asp-for="SeatType" class="form-select" asp-items="ViewBag.SeatTypes"></select>
+        </div>
+
+        <input type="hidden" asp-for="RoomID" />
+
+        <button type="submit" class="btn btn-success">Lưu</button>
+        <a asp-action="Index" asp-route-roomId="@Model.RoomID" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>

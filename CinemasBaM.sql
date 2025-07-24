@@ -161,6 +161,8 @@ Create Table Movies
 	Title Nvarchar (255),
 	Duration int,
 	Genre Nvarchar (100)
+	image nvarchar(555)
+	ReleaseDate DATE;
 );
 go
 

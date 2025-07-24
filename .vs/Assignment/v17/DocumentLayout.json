@@ -3,68 +3,16 @@
   "WorkspaceRootPath": "D:\\Visual Project\\Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\rooms\\editrooms.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\rooms\\editrooms.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\models\\employeerolemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\models\\employeerolemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\rooms\\roomofcinema.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\rooms\\roomofcinema.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\models\\employeecinemaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\models\\employeecinemaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\rooms\\selectcinema.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\rooms\\selectcinema.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\seatlayoutconfig\\createseatlayoutconfig.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\seatlayoutconfig\\createseatlayoutconfig.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\rooms\\checklayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\rooms\\checklayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\controllers\\roomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\controllers\\roomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\controllers\\seatlayoutconfigcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\controllers\\seatlayoutconfigcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\rooms\\deleterooms.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\rooms\\deleterooms.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\rooms\\createrooms.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\rooms\\createrooms.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\controllers\\cinemacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\controllers\\cinemacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\cinema\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\cinema\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\models\\seatlayoutdisplaymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\models\\seatlayoutdisplaymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\seatlayoutconfig\\editseatlayoutconfig.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\seatlayoutconfig\\editseatlayoutconfig.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\models\\seatlayoutconfigmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\models\\seatlayoutconfigmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\views\\seatlayoutconfig\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\views\\seatlayoutconfig\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\controllers\\seattypecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\controllers\\seattypecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|d:\\visual project\\assignment\\cinema_assignment\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{536F3987-04A4-43D7-9E4C-C227A4D83580}|Cinema_Assignment\\Cinema_Assignment.csproj|solutionrelative:cinema_assignment\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,207 +22,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "RoomsController.cs",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\RoomsController.cs",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Controllers\\RoomsController.cs",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\RoomsController.cs",
-              "RelativeToolTip": "Cinema_Assignment\\Controllers\\RoomsController.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAYwHEAAAA7AAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "EmployeesController.cs",
+              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\EmployeesController.cs",
+              "RelativeDocumentMoniker": "Cinema_Assignment\\Controllers\\EmployeesController.cs",
+              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\EmployeesController.cs",
+              "RelativeToolTip": "Cinema_Assignment\\Controllers\\EmployeesController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAcwMwAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-18T08:49:18.405Z",
+              "WhenOpened": "2025-07-23T07:17:52.296Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DeleteRooms.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\DeleteRooms.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\Rooms\\DeleteRooms.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\DeleteRooms.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\Rooms\\DeleteRooms.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-19T04:08:43.543Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EditRooms.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\EditRooms.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\Rooms\\EditRooms.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\EditRooms.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\Rooms\\EditRooms.cshtml",
-              "ViewState": "AgIAABMAAAAAAAAAAADwvyAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-19T04:08:16.62Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Cinema\\Delete.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\Cinema\\Delete.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Cinema\\Delete.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\Cinema\\Delete.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-18T15:36:28.395Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "CinemaController.cs",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\CinemaController.cs",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Controllers\\CinemaController.cs",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\CinemaController.cs",
-              "RelativeToolTip": "Cinema_Assignment\\Controllers\\CinemaController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAiwDYAAAAZAAAAAAAAAA==",
+              "Title": "EmployeeRoleModel.cs",
+              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Models\\EmployeeRoleModel.cs",
+              "RelativeDocumentMoniker": "Cinema_Assignment\\Models\\EmployeeRoleModel.cs",
+              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Models\\EmployeeRoleModel.cs",
+              "RelativeToolTip": "Cinema_Assignment\\Models\\EmployeeRoleModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-18T15:31:53.825Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SelectCinema.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\SelectCinema.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\Rooms\\SelectCinema.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\SelectCinema.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\Rooms\\SelectCinema.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-18T15:13:38.239Z",
+              "WhenOpened": "2025-07-24T16:56:53.025Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "SeatLayoutConfigModel.cs",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Models\\SeatLayoutConfigModel.cs",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Models\\SeatLayoutConfigModel.cs",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Models\\SeatLayoutConfigModel.cs",
-              "RelativeToolTip": "Cinema_Assignment\\Models\\SeatLayoutConfigModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-18T14:38:51.189Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "EditSeatLayoutConfig.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\SeatLayoutConfig\\EditSeatLayoutConfig.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\SeatLayoutConfig\\EditSeatLayoutConfig.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\SeatLayoutConfig\\EditSeatLayoutConfig.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\SeatLayoutConfig\\EditSeatLayoutConfig.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-18T14:33:24.089Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CreateSeatLayoutConfig.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\SeatLayoutConfig\\CreateSeatLayoutConfig.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\SeatLayoutConfig\\CreateSeatLayoutConfig.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\SeatLayoutConfig\\CreateSeatLayoutConfig.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\SeatLayoutConfig\\CreateSeatLayoutConfig.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-18T14:32:58.799Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\SeatLayoutConfig\\Index.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\SeatLayoutConfig\\Index.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\SeatLayoutConfig\\Index.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\SeatLayoutConfig\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-18T14:31:25.434Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RoomOfCinema.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\RoomOfCinema.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\Rooms\\RoomOfCinema.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\RoomOfCinema.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\Rooms\\RoomOfCinema.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAB+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-18T13:59:36.576Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CheckLayout.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\CheckLayout.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\Rooms\\CheckLayout.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\CheckLayout.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\Rooms\\CheckLayout.cshtml",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAAD4AAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-18T13:34:49.739Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "SeatLayoutDisplayModel.cs",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Models\\SeatLayoutDisplayModel.cs",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Models\\SeatLayoutDisplayModel.cs",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Models\\SeatLayoutDisplayModel.cs",
-              "RelativeToolTip": "Cinema_Assignment\\Models\\SeatLayoutDisplayModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAADAAAAAAAAAA==",
+              "Title": "EmployeeCinemaViewModel.cs",
+              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Models\\EmployeeCinemaViewModel.cs",
+              "RelativeDocumentMoniker": "Cinema_Assignment\\Models\\EmployeeCinemaViewModel.cs",
+              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Models\\EmployeeCinemaViewModel.cs",
+              "RelativeToolTip": "Cinema_Assignment\\Models\\EmployeeCinemaViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-18T12:36:52.545Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SeatLayoutConfigController.cs",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\SeatLayoutConfigController.cs",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Controllers\\SeatLayoutConfigController.cs",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\SeatLayoutConfigController.cs",
-              "RelativeToolTip": "Cinema_Assignment\\Controllers\\SeatLayoutConfigController.cs",
-              "ViewState": "AgIAAHsAAAAAAAAAAADwvyEAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-15T11:32:36.489Z",
+              "WhenOpened": "2025-07-24T16:51:56.168Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CreateRooms.cshtml",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\CreateRooms.cshtml",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Views\\Rooms\\CreateRooms.cshtml",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Views\\Rooms\\CreateRooms.cshtml",
-              "RelativeToolTip": "Cinema_Assignment\\Views\\Rooms\\CreateRooms.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-15T09:28:38.24Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "SeatTypeController.cs",
-              "DocumentMoniker": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\SeatTypeController.cs",
-              "RelativeDocumentMoniker": "Cinema_Assignment\\Controllers\\SeatTypeController.cs",
-              "ToolTip": "D:\\Visual Project\\Assignment\\Cinema_Assignment\\Controllers\\SeatTypeController.cs",
-              "RelativeToolTip": "Cinema_Assignment\\Controllers\\SeatTypeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHsAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T12:46:36.56Z"
             }
           ]
         }

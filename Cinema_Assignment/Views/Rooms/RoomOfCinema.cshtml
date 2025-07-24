@@ -25,7 +25,8 @@
                         <a asp-action="EditRooms" asp-route-id="@room.RoomID" class="btn btn-warning btn-sm me-1">✏️ Sửa</a>
                         <a asp-action="DeleteRooms" asp-route-id="@room.RoomID" class="btn btn-danger btn-sm me-1">🗑️ Xoá</a>
                         <a asp-controller="SeatLayoutConfig" asp-action="Index" asp-route-roomId="@room.RoomID" class="btn btn-outline-secondary btn-sm me-1">Cấu hình Layout</a>
-                        <a asp-action="CheckLayout" asp-route-roomId="@room.RoomID" class="btn btn-outline-info btn-sm me-1">Kiểm tra Layout</a>
+                        <a asp-action="CheckLayout" asp-route-roomId="@room.RoomID" class="btn btn-info btn-sm text-white">🔍 Kiểm tra sơ đồ</a>
+
                     </td>
                 </tr>
             }

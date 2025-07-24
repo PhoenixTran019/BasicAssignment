@@ -211,5 +211,42 @@ namespace Cinema_Assignment.Controllers
             return (int)cmd.ExecuteScalar();
         }
 
+        public IActionResult CheckLayout(int roomId)
+        {
+            var configs = new List<SeatLayoutDisplayModel>();
+
+            using var conn = new SqlConnection(_connectionString);
+            conn.Open();
+
+            var cmd = new SqlCommand(@"
+                SELECT c.StartRow, c.EndRow, c.StartCol, c.EndCol, t.TypeName, t.Price
+                FROM SeatLayoutConfigs c
+                JOIN SeatTypes t ON c.SeatType = t.TypeID
+                WHERE c.RoomID = @RoomID", conn);
+
+            cmd.Parameters.AddWithValue("@RoomID", roomId);
+
+            var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                configs.Add(new SeatLayoutDisplayModel
+                {
+                    StartRow = Convert.ToChar(reader["StartRow"]),
+                    EndRow = Convert.ToChar(reader["EndRow"]),
+                    StartCol = (int)reader["StartCol"],
+                    EndCol = (int)reader["EndCol"],
+                    TypeName = ((int)reader["TypeName"] == 1) ? "Standard" : "VIP",
+                    Price = (decimal)reader["Price"]
+                });
+            }
+
+            ViewBag.RoomID = roomId;
+
+            return View(configs);
+        }
+
+
+
     }
 }

@@ -1,0 +1,25 @@
+﻿@model Cinema_Assignment.Models.MovieModel
+
+@{
+    ViewBag.Title = "Xóa phim";
+}
+
+<h2>❌ Xóa Phim</h2>
+
+<h4>Bạn có chắc chắn muốn xóa phim: <strong>@Model.Title</strong>?</h4>
+
+<div>
+    <p><strong>Thể loại:</strong> @Model.Genre</p>
+    <p><strong>Thời lượng:</strong> @Model.Duration phút</p>
+    <p><strong>Ngày phát hành:</strong> @Model.ReleaseDate.ToString("dd/MM/yyyy")</p>
+    @if (!string.IsNullOrEmpty(Model.Image))
+    {
+        <img src="@Model.Image" width="120" />
+    }
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="MovieID" />
+    <button type="submit" class="btn btn-danger mt-3">Xác nhận xóa</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Huỷ</a>
+</form>

@@ -1,0 +1,11 @@
+﻿namespace Cinema_Assignment.Models
+{
+    public class EmployeeCinemaViewModel
+    {
+        public int EmployeeID { get; set; }
+        public string FullName { get; set; }
+        public int Role { get; set; }
+        public int ? CinemaID { get; set; }
+        public string ? CinemaName { get; set; }
+    }
+}

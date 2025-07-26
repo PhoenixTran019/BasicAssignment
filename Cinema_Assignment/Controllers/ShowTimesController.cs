@@ -222,18 +222,45 @@ namespace Cinema_Assignment.Controllers
         public IActionResult CreateShowtimes(ShowTimeModel showTime)
         {
             int duration = GetMovieDuration(showTime.MovieID);
-
             showTime.EndTime = showTime.StartTime.AddMinutes(duration);
+
+            // Ràng buộc 1: Ngày tạo phải cách 3 ngày
+            if ((showTime.StartTime - DateTime.Now).TotalDays < 3)
+            {
+                ModelState.AddModelError("", "Xuất chiếu phải được tạo cách ít nhất 3 ngày so với ngày hiện tại.");
+                return View(showTime); // trả về view với lỗi
+            }
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
-                string sql = "INSERT INTO ShowTimes (ShowtimeID, RoomID, MovieID, StartTime, EndTime) " +
-                             "VALUES (@ShowtimeID, @RoomID, @MovieID, @StartTime, @EndTime)";
+                // Ràng buộc 2: Không trùng giờ chiếu trong cùng phòng (cách nhau < 45 phút)
+                string overlapCheck = @"
+            SELECT COUNT(*) FROM ShowTimes 
+            WHERE RoomID = @RoomID AND (
+                (StartTime <= @NewStartTime AND EndTime > @NewStartTime) OR
+                (StartTime < @NewEndTime AND EndTime >= @NewEndTime) OR
+                (StartTime >= @NewStartTime AND EndTime <= @NewEndTime)
+            )";
+
+                SqlCommand checkCmd = new SqlCommand(overlapCheck, conn);
+                checkCmd.Parameters.AddWithValue("@RoomID", showTime.RoomID);
+                checkCmd.Parameters.AddWithValue("@NewStartTime", showTime.StartTime.AddMinutes(-45)); // cho phép cách ít nhất 45 phút
+                checkCmd.Parameters.AddWithValue("@NewEndTime", showTime.EndTime.AddMinutes(45));     // cũng kiểm tra kết thúc không quá sát
+
+                int conflictCount = (int)checkCmd.ExecuteScalar();
+                if (conflictCount > 0)
+                {
+                    ModelState.AddModelError("", "Xuất chiếu này quá gần với một suất chiếu khác trong cùng phòng (cách nhau ít nhất 45 phút).");
+                    return View(showTime);
+                }
+
+                // Nếu mọi điều kiện đều OK thì INSERT
+                string sql = "INSERT INTO ShowTimes (RoomID, MovieID, StartTime, EndTime) " +
+                             "VALUES (@RoomID, @MovieID, @StartTime, @EndTime)";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@ShowtimeID", showTime.ShowTimeID);
                 cmd.Parameters.AddWithValue("@RoomID", showTime.RoomID);
                 cmd.Parameters.AddWithValue("@MovieID", showTime.MovieID);
                 cmd.Parameters.AddWithValue("@StartTime", showTime.StartTime);
@@ -241,8 +268,8 @@ namespace Cinema_Assignment.Controllers
                 cmd.ExecuteNonQuery();
             }
 
-            return RedirectToAction("Index", new { roomId = showTime.RoomID });
-        }
+            return RedirectToAction("IndexAllShowTime");
+        } 
 
         // GET: Edit
         public IActionResult EditShowtimes(int id)
@@ -332,19 +359,29 @@ namespace Cinema_Assignment.Controllers
 
         // POST: Delete
         [HttpPost]
-        public IActionResult DeleteShowtimesConfirmed(int id)
+        public IActionResult DeleteShowtime(int id)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string sql = "DELETE FROM ShowTimes WHERE ShowTimeID = @id";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.ExecuteNonQuery();
+                string getSql = "SELECT StartTime FROM ShowTimes WHERE ShowtimeID = @id";
+                SqlCommand getCmd = new SqlCommand(getSql, conn);
+                getCmd.Parameters.AddWithValue("@id", id);
+                DateTime startTime = (DateTime)getCmd.ExecuteScalar();
+
+                if ((startTime - DateTime.Now).TotalDays < 3)
+                {
+                    TempData["Error"] = "Không thể xóa suất chiếu sẽ diễn ra trong vòng 3 ngày.";
+                    return RedirectToAction("IndexAllShowTime");
+                }
+
+                string deleteSql = "DELETE FROM ShowTimes WHERE ShowtimeID = @id";
+                SqlCommand delCmd = new SqlCommand(deleteSql, conn);
+                delCmd.Parameters.AddWithValue("@id", id);
+                delCmd.ExecuteNonQuery();
             }
 
-            return RedirectToAction("Index");
-
+            return RedirectToAction("IndexAllShowTime");
         }
     }
 }

@@ -1,0 +1,47 @@
+﻿@model List<Cinema_Assignment.Models.EmployeeCinemaViewModel>
+
+@{
+    ViewBag.Title = "Quản lý nhân viên và rạp";
+}
+
+<h2>👥 Quản lý nhân viên</h2>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>EmployeeID</th>
+            <th>Họ và Tên</th>
+            <th>Vai trò</th>
+            <th>Rạp</th>
+            <th>Vị trí</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.EmployeeID</td>
+                <td>@emp.FullName</td>
+                <td>
+                    @(string.IsNullOrEmpty(emp.RoleName) ? "Chưa có vai trò" : emp.RoleName)
+                </td>
+                <td>
+                    @Html.Raw(string.IsNullOrEmpty(emp.CinemaName) ? "<span class='text-danger'>Chưa có rạp</span>" : emp.CinemaName)
+                </td>
+                <td>@(string.IsNullOrEmpty(emp.Position) ? "-" : emp.Position)</td>
+                <td>
+                    @if (emp.CinemaID != null)
+                    {
+                        <a asp-action="EditAssign" asp-route-employeeId="@emp.EmployeeID" class="btn btn-warning btn-sm">✏️ Sửa</a>
+                        <a asp-action="DeleteAssign" asp-route-employeeId="@emp.EmployeeID" class="btn btn-danger btn-sm">❌ Hủy</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-sm btn-primary" asp-action="Assign" asp-route-employeeId="@emp.EmployeeID">📍 Chọn rạp</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

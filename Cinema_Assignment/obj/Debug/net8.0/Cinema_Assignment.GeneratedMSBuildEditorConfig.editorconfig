@@ -28,6 +28,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/CinemaEmployees/Assign.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hRW1wbG95ZWVzXEFzc2lnbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/CinemaEmployees/DeleteAssign.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hRW1wbG95ZWVzXERlbGV0ZUFzc2lnbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/CinemaEmployees/EditAssign.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hRW1wbG95ZWVzXEVkaXRBc3NpZ24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/CinemaEmployees/IndexMain.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hRW1wbG95ZWVzXEluZGV4TWFpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Cinema/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -62,6 +78,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Employees/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Foods/CreateFoods.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNcQ3JlYXRlRm9vZHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Foods/DeleteFoods.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNcRGVsZXRlRm9vZHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Foods/EditFoods.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNcRWRpdEZvb2RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Foods/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Home/Index.cshtml]

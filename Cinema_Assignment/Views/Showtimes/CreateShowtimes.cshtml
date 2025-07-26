@@ -1,8 +1,16 @@
 ﻿@model Cinema_Assignment.Models.ShowTimeModel
 
 <h2>➕ Thêm Suất Chiếu</h2>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
 
 <form asp-action="CreateShowTimes" method="post">
+   
+    <div class="form-group">
+        <label>Mã Rạp (ID)</label>
+        <input asp-for="RoomID" class="form-control" readonly />
+        <input type="hidden" asp-for="RoomID" />
+    </div>
 
     <div class="form-group">
         <label>Mã Suất Chiếu (ID)</label>

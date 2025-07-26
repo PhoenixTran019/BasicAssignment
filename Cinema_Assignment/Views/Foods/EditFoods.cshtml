@@ -1,0 +1,43 @@
+﻿@model Cinema_Assignment.Models.FoodModel
+
+@{
+    ViewBag.Title = "Chỉnh sửa món ăn";
+}
+
+<h2>✏️ Sửa món ăn</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="FoodID" />
+    <input type="hidden" asp-for="Image" />
+
+    <div class="form-group">
+        <label>Tên món</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Giá</label>
+        <input asp-for="Price" class="form-control" type="number" step="0.01" />
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Ảnh hiện tại</label><br />
+        @if (!string.IsNullOrEmpty(Model.Image))
+        {
+            <img src="@Model.Image" alt="Ảnh" width="120" />
+        }
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Chọn ảnh mới (nếu muốn thay)</label>
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Mô tả</label>
+        <textarea asp-for="Decription" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">✔️ Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Quay lại</a>
+</form>

@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Gán rạp cho nhân viên";
+    var cinemas = ViewBag.Cinemas as List<Cinema_Assignment.Models.CinemaModel>;
+    var roles = ViewBag.EmployeeRoles as List<Cinema_Assignment.Models.EmployeeRoleModel>;
+}
+
+<h2>📍 Gán rạp cho nhân viên @ViewBag.EmployeeID</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form asp-action="Assign" method="post">
+    <input type="hidden" name="employeeId" value="@ViewBag.EmployeeID" />
+
+    <div class="form-group">
+        <label>Chọn vai trò</label>
+        <select name="roleId" class="form-control" required>
+            <option value="">-- Chọn vai trò --</option>
+            @foreach (var r in roles)
+            {
+                <option value="@r.RoleID">@r.RoleName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Chọn rạp</label>
+        <select name="cinemaId" class="form-control" required>
+            <option value="">-- Chọn rạp --</option>
+            @foreach (var c in cinemas)
+            {
+                <option value="@c.CinemaID">@c.CinemaName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Chọn vị trí</label>
+        <select class="form-control" name="position" id="positionSelect" onchange="checkOtherPosition()" required>
+            <option value="">-- Chọn vị trí --</option>
+            <option value="SM">SM</option>
+            <option value="ASM">ASM</option>
+            <option value="ASM 2">ASM 2</option>
+            <option value="FOH">FOH</option>
+            <option value="BOH">BOH</option>
+            <option value="Khác">Khác</option>
+        </select>
+        <input type="text" name="otherPosition" id="otherPositionInput" class="form-control mt-2" placeholder="Nhập vị trí khác" style="display: none;" />
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">💾 Gán</button>
+    <a asp-action="IndexMain" class="btn btn-secondary mt-3">Quay lại</a>
+</form>
+
+<script>
+    function checkOtherPosition() {
+        var selected = document.getElementById("positionSelect").value;
+        var otherInput = document.getElementById("otherPositionInput");
+
+        if (selected === "Khác") {
+            otherInput.style.display = "block";
+            otherInput.setAttribute("required", "required");
+        } else {
+            otherInput.style.display = "none";
+            otherInput.removeAttribute("required");
+            otherInput.value = "";
+        }
+    }
+</script>

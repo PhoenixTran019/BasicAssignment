@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Sửa phân công rạp";
+    var cinemas = ViewBag.Cinemas as List<Cinema_Assignment.Models.CinemaModel>;
+    var roles = ViewBag.EmployeeRoles as List<Cinema_Assignment.Models.EmployeeRoleModel>;
+    string selectedPosition = ViewBag.SelectedPosition as string ?? "";
+    int selectedRoleId = ViewBag.SelectedRoleID ?? 0;
+    int selectedCinemaId = ViewBag.SelectedCinemaID ?? 0;
+}
+
+<h2>✏️ Sửa phân công cho nhân viên @ViewBag.EmployeeID</h2>
+
+<form asp-action="EditAssign" method="post">
+    <input type="hidden" name="employeeId" value="@ViewBag.EmployeeID" />
+
+    <div class="form-group">
+        <label>Vai trò</label>
+        <select name="roleId" class="form-control" required>
+            <option value="">-- Chọn vai trò --</option>
+            @foreach (var r in roles)
+            {
+                var selected = r.RoleID == selectedRoleId ? "selected" : "";
+                <option value="@r.RoleID" selected="@selected">@r.RoleName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Rạp</label>
+        <select name="cinemaId" class="form-control" required>
+            <option value="">-- Chọn rạp --</option>
+            @foreach (var c in cinemas)
+            {
+                var selected = c.CinemaID == selectedCinemaId ? "selected" : "";
+                <option value="@c.CinemaID" selected="@selected">@c.CinemaName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Vị trí</label>
+        <select class="form-control" name="position" id="positionSelect" onchange="checkOtherPosition()" required>
+            <option value="">-- Chọn vị trí --</option>
+            @{
+                var standardPositions = new List<string> { "SM", "ASM", "ASM 2", "FOH", "BOH" };
+                foreach (var pos in standardPositions)
+                {
+                    var selected = selectedPosition == pos ? "selected" : "";
+                    <option value="@pos" selected="@selected">@pos</option>
+                }
+                var isOther = !standardPositions.Contains(selectedPosition);
+                var selectedOther = isOther ? "selected" : "";
+            }
+            <option value="Khác" selected="@selectedOther">Khác</option>
+        </select>
+
+        <input type="text" name="otherPosition" id="otherPositionInput" class="form-control mt-2"
+               value="@(selectedPosition != "SM" && selectedPosition != "ASM" && selectedPosition != "ASM 2" && selectedPosition != "FOH" && selectedPosition != "BOH" ? selectedPosition : "")"
+               placeholder="Nhập vị trí khác" style="display: none;" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">✔️ Cập nhật</button>
+    <a asp-action="IndexMain" class="btn btn-secondary mt-3">Quay lại</a>
+</form>
+
+<script>
+    function checkOtherPosition() {
+        var selected = document.getElementById("positionSelect").value;
+        var otherInput = document.getElementById("otherPositionInput");
+
+        if (selected === "Khác") {
+            otherInput.style.display = "block";
+        } else {
+            otherInput.style.display = "none";
+            otherInput.value = "";
+        }
+    }
+
+    // Auto-show textbox nếu vị trí là "Khác"
+    window.onload = function () {
+        checkOtherPosition();
+    };
+</script>

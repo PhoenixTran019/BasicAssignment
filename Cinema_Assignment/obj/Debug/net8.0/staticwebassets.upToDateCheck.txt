@@ -58,4 +58,11 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\uploads\foods\12428a28-0b8e-478f-a3af-ec5804e7eeb0.png
+wwwroot\uploads\foods\1956a6e5-d641-413e-b1b2-4d04cebbb5c5.png
+wwwroot\uploads\foods\2898c734-d5a2-4d0c-9f10-c38b6d9e207b.png
+wwwroot\uploads\foods\40a20178-d85b-4628-b5c5-59b66bfcaf92.png
+wwwroot\uploads\foods\5671196e-ebd4-4513-9bb2-2a2d26b5aa5b.png
+wwwroot\uploads\foods\7278a6aa-0514-45b5-a03d-d71dcd124252.png
+wwwroot\uploads\foods\a15aed40-c061-44d3-8c51-5a3f58554171.png
 wwwroot\uploads\movies\2e379530-6bf7-42ed-aebd-37c74f6c4fab.jpg

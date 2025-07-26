@@ -1,0 +1,42 @@
+﻿@model List<Cinema_Assignment.Models.FoodModel>
+
+@{
+    ViewBag.Title = "Danh sách món ăn";
+}
+
+<h2>🍔 Danh sách món ăn</h2>
+<a asp-action="CreateFoods" class="btn btn-success mb-3">➕ Thêm món ăn</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Mã</th>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Ảnh</th>
+            <th>Mô tả</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var food in Model)
+        {
+            <tr>
+                <td>@food.FoodID</td>
+                <td>@food.Name</td>
+                <td>@food.Price.ToString("N0") đ</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(food.Image))
+                    {
+                        <img src="@food.Image" alt="Ảnh" width="80" />
+                    }
+                </td>
+                <td>@food.Decription</td>
+                <td>
+                    <a asp-action="EditFoods" asp-route-id="@food.FoodID" class="btn btn-primary btn-sm">Sửa</a>
+                    <a asp-action="DeleteFoods" asp-route-id="@food.FoodID" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

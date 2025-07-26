@@ -127,6 +127,27 @@ namespace Cinema_Assignment.Controllers
                 insertStockCmd.ExecuteNonQuery();
             }
 
+            // 3. Gán tất cả các món Food hiện có vào rạp mới trong Foods_Cinemas
+            var foodCmd = new SqlCommand("SELECT FoodID FROM Foods", conn);
+            var foodReader = foodCmd.ExecuteReader();
+            var foodIDs = new List<int>();
+            while (foodReader.Read())
+            {
+                foodIDs.Add((int)foodReader["FoodID"]);
+            }
+            foodReader.Close();
+
+            foreach (var foodId in foodIDs)
+            {
+                var insertFoodCinema = new SqlCommand(@"
+                    INSERT INTO Foods_Cinemas (FoodID, CinemaID, Status)
+                    VALUES (@foodID, @cinemaID, 1)", conn);
+                insertFoodCinema.Parameters.AddWithValue("@foodID", foodId);
+                insertFoodCinema.Parameters.AddWithValue("@cinemaID", model.CinemaID);
+                insertFoodCinema.ExecuteNonQuery();
+            }
+
+
             return RedirectToAction("Index");
         }
 

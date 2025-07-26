@@ -1,0 +1,21 @@
+﻿@model Cinema_Assignment.Models.EmployeeCinemaViewModel
+
+@{
+    ViewBag.Title = "Xác nhận hủy phân công";
+}
+
+<h2 class="text-danger">❌ Xác nhận hủy phân công</h2>
+
+<div class="alert alert-warning mt-3">
+    <p>Bạn có chắc chắn muốn <strong>hủy phân công</strong> nhân viên <strong>@Model.FullName</strong> khỏi rạp <strong>@Model.CinemaName</strong> không?</p>
+    <ul>
+        <li>Vai trò: @Model.RoleName</li>
+        <li>Vị trí: @Model.Position</li>
+    </ul>
+</div>
+
+<form asp-action="DeleteAssignConfirmed" method="post">
+    <input type="hidden" name="employeeId" value="@Model.EmployeeID" />
+    <button type="submit" class="btn btn-danger">🗑️ Xác nhận hủy</button>
+    <a asp-action="IndexMain" class="btn btn-secondary">Quay lại</a>
+</form>

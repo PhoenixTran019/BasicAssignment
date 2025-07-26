@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Cinema_Assignment.Models.ItemModel
+
 @{
+    ViewBag.Title = "Thông tin chi tiết mặt hàng";
 }
+
+<div class="container mt-4">
+    <h2 class="text-primary mb-4"><i class="bi bi-info-circle"></i> Chi tiết mặt hàng</h2>
+
+    <div class="card shadow p-4">
+        <dl class="row">
+            <dt class="col-sm-3">🆔 Mã mặt hàng</dt>
+            <dd class="col-sm-9">@Model.ItemID</dd>
+
+            <dt class="col-sm-3">📦 Tên mặt hàng</dt>
+            <dd class="col-sm-9">@Model.ItemName</dd>
+
+            <dt class="col-sm-3">📏 Đơn vị</dt>
+            <dd class="col-sm-9">@Model.Unit</dd>
+
+            <dt class="col-sm-3">🔢 Số lượng trên đơn vị</dt>
+            <dd class="col-sm-9">@Model.QuanlityPerUnit</dd>
+
+            <dt class="col-sm-3">🏷️ Phân loại</dt>
+            <dd class="col-sm-9">@Model.Category</dd>
+
+            <dt class="col-sm-3">📝 Mô tả</dt>
+            <dd class="col-sm-9">
+                @if (string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    <em class="text-muted">Không có mô tả</em>
+                }
+                else
+                {
+                    @Model.Description
+                }
+            </dd>
+        </dl>
+
+        <div class="mt-4">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Quay lại danh sách
+            </a>
+            <a asp-action="EditItems" asp-route-id="@Model.ItemID" class="btn btn-warning">
+                <i class="bi bi-pencil-square"></i> Sửa thông tin
+            </a>
+        </div>
+    </div>
+</div>

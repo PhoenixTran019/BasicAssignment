@@ -1,0 +1,67 @@
+﻿@model CustomerRegisterViewModel
+@{
+    ViewBag.Title = "Đăng ký khách hàng";
+}
+
+<h2>Đăng ký tài khoản khách hàng</h2>
+
+<form asp-action="Register" method="post">
+    
+    <div class="form-group">
+        <label asp-for="CustomerID"></label>
+        <input asp-for="CustomerID" class="form-control" readonly />
+        <input type="hidden" asp-for="CustomerID" />
+    </div>
+
+
+    <input type="hidden" asp-for="AccountID" />
+
+    <input type="hidden" asp-for="LoginID" />
+
+  
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>Họ</label>
+            <input asp-for="FirstName" class="form-control" required />
+        </div>
+        <div class="col-md-6">
+            <label>Tên</label>
+            <input asp-for="LastName" class="form-control" required />
+        </div>
+    </div>
+
+    <label>Giới tính</label>
+    <select asp-for="Gender" class="form-control">
+        <option>Nam</option>
+        <option>Nữ</option>
+        <option>Khác</option>
+    </select>
+
+    <label>Ngày sinh</label>
+    <input asp-for="DOB" type="date" class="form-control" required />
+
+    <label>Số điện thoại</label>
+    <input asp-for="PhoneNumber" class="form-control" required />
+
+    <label>Email</label>
+    <input asp-for="Email" type="email" class="form-control" required />
+
+    <label>Địa chỉ</label>
+    <input asp-for="Address" class="form-control" required />
+
+    <label>Mật khẩu</label>
+    <input asp-for="Password" type="password" class="form-control" required />
+
+    <label>Xác nhận mật khẩu</label>
+    <input asp-for="ConfirmPassword" type="password" class="form-control" required />
+
+    <br />
+    <button type="submit" class="btn btn-success">Đăng ký</button>
+    <a asp-action="Login" asp-controller="Auth" class="btn btn-secondary">Đăng nhập</a>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="text-danger mt-2">@Html.ValidationSummary()</div>
+}

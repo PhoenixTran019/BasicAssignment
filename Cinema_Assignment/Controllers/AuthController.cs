@@ -15,6 +15,7 @@ namespace Cinema_Assignment.Controllers
         private readonly IWebHostEnvironment _env;
 
         
+
         public AuthController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
@@ -41,7 +42,7 @@ namespace Cinema_Assignment.Controllers
                     JOIN Employees e ON ae.EmployeeID = e.EmployeeID
                     WHERE ae.Username = @username AND ae.PasswordHash = @password", conn);
 
-                cmd.Parameters.AddWithValue("@username", model.Username);
+                cmd.Parameters.AddWithValue("@username", model.Identifier);
                 cmd.Parameters.AddWithValue("@password", hash);
 
                 var reader = cmd.ExecuteReader();
@@ -62,6 +63,24 @@ namespace Cinema_Assignment.Controllers
                         4 => RedirectToAction("Index", "Employee")
                     };
                 }
+                reader.Close();
+                var cmd2 = new SqlCommand(@"
+            SELECT ac.CustomerID
+            FROM LoginIdentifiers li
+            JOIN AccountCustomers ac ON li.AccountID = ac.AccountID
+            WHERE li.Identifier = @identifier AND ac.PasswordHash = @password", conn);
+
+                cmd2.Parameters.AddWithValue("@identifier", model.Identifier);
+                cmd2.Parameters.AddWithValue("@password", hash);
+
+                var reader2 = cmd2.ExecuteReader();
+                if (reader2.Read())
+                {
+                    HttpContext.Session.SetString("UserType", "Customer");
+                    HttpContext.Session.SetInt32("UserID", (int)reader2["CustomerID"]);
+                    return RedirectToAction("Home", "Customer"); // hoặc trang phim
+                }
+
             }
             ModelState.AddModelError("", "Invalid username or password.");
             return View(model);

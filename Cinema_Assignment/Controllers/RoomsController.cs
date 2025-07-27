@@ -211,39 +211,39 @@ namespace Cinema_Assignment.Controllers
             return (int)cmd.ExecuteScalar();
         }
 
+
         public IActionResult CheckLayout(int roomId)
         {
-            var configs = new List<SeatLayoutDisplayModel>();
+            var seats = new List<SeatModel>();
 
             using var conn = new SqlConnection(_connectionString);
             conn.Open();
 
             var cmd = new SqlCommand(@"
-                SELECT c.StartRow, c.EndRow, c.StartCol, c.EndCol, t.TypeName, t.Price
-                FROM SeatLayoutConfigs c
-                JOIN SeatTypes t ON c.SeatType = t.TypeID
-                WHERE c.RoomID = @RoomID", conn);
-
+        SELECT s.SeatName, s.RowChar, s.ColumNum, s.IsLock,
+               t.TypeName, t.Price
+        FROM Seats s
+        JOIN SeatTypes t ON s.SeatType = t.TypeID
+        WHERE s.RoomID = @RoomID
+    ", conn);
             cmd.Parameters.AddWithValue("@RoomID", roomId);
 
             var reader = cmd.ExecuteReader();
-
             while (reader.Read())
             {
-                configs.Add(new SeatLayoutDisplayModel
+                seats.Add(new SeatModel
                 {
-                    StartRow = Convert.ToChar(reader["StartRow"]),
-                    EndRow = Convert.ToChar(reader["EndRow"]),
-                    StartCol = (int)reader["StartCol"],
-                    EndCol = (int)reader["EndCol"],
-                    TypeName = ((int)reader["TypeName"] == 1) ? "Standard" : "VIP",
-                    Price = (decimal)reader["Price"]
+                    SeatName = reader["SeatName"].ToString(),
+                    RowChar = Convert.ToChar(reader["RowChar"]),
+                    ColumNum = (int)reader["ColumNum"],
+                    Decription = reader["TypeName"].ToString(),
+                    Price = (decimal)reader["Price"],
+                    IsLock = (bool)reader["IsLock"]
                 });
             }
 
             ViewBag.RoomID = roomId;
-
-            return View(configs);
+            return View(seats);
         }
 
 

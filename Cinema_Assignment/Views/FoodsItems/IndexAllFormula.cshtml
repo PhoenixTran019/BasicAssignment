@@ -1,0 +1,40 @@
+﻿@model List<Cinema_Assignment.Models.FoodFormulaViewModel>
+
+@{
+    ViewBag.Title = "Danh sách công thức món ăn";
+}
+
+<h2>Danh sách món ăn và công thức</h2>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Tên món ăn</th>
+            <th>Trạng thái công thức</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var food in Model)
+        {
+            var hasFormula = food.Items.Count > 0;
+            <tr>
+                <td>@food.FoodName</td>
+                <td>
+                    @(hasFormula ? "Đã có công thức" : "Chưa có công thức")
+                </td>
+                <td>
+                    @if (hasFormula)
+                    {
+                        <a asp-action="EditFormula" asp-route-foodId="@food.FoodID" class="btn btn-warning btn-sm">Sửa</a>
+                        <a asp-action="DeleteFormula" asp-route-foodId="@food.FoodID" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xoá công thức này?')">Xoá</a>
+                    }
+                    else
+                    {
+                        <a asp-action="CreateFormula" asp-route-foodId="@food.FoodID" class="btn btn-success btn-sm">Thêm công thức</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

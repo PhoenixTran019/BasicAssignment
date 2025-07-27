@@ -28,6 +28,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Booking/BookTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xCb29rVGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Booking/ComfirmBooking.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xDb21maXJtQm9va2luZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Booking/Success.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xTdWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/CinemaEmployees/Assign.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hRW1wbG95ZWVzXEFzc2lnbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,6 +72,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZW1hXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/CustomerAuth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJBdXRoXFJlZ2lzdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/CustomerMovies/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJNb3ZpZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/Customer/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Employees/CreateEmployees.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXENyZWF0ZUVtcGxveWVlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -78,6 +102,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Employees/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/FoodsItems/CreateFormula.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNJdGVtc1xDcmVhdGVGb3JtdWxhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/FoodsItems/EditFormula.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNJdGVtc1xFZGl0Rm9ybXVsYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Visual Project/Assignment/Cinema_Assignment/Views/FoodsItems/IndexAllFormula.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNJdGVtc1xJbmRleEFsbEZvcm11bGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Visual Project/Assignment/Cinema_Assignment/Views/Foods/CreateFoods.cshtml]

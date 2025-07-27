@@ -1,0 +1,22 @@
+﻿<div class="container mt-4">
+    <h3>Xác nhận thông tin đặt vé</h3>
+    <p><strong>Xuất chiếu:</strong> @Model.ShowtimeId</p>
+    <p><strong>Ghế đã chọn:</strong> @Model.SelectedSeats</p>
+
+    <form asp-action="ConfirmBooking" method="post">
+        <input type="hidden" name="ShowtimeId" value="@Model.ShowtimeId" />
+        <input type="hidden" name="SelectedSeats" value="@Model.SelectedSeats" />
+
+        <div class="mb-3">
+            <label for="PaymentMethod">Chọn phương thức thanh toán:</label>
+            <select class="form-control" name="PaymentMethod" required>
+                <option value="Cash">Tiền mặt</option>
+                <option value="CreditCard">Thẻ tín dụng</option>
+                <option value="Momo">Momo</option>
+                <option value="ZaloPay">ZaloPay</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Xác nhận thanh toán</button>
+    </form>
+</div>

@@ -1,0 +1,51 @@
+﻿@model Cinema_Assignment.Models.MovieDetailsViewModel
+
+<div class="container mt-4">
+    <div class="card shadow rounded">
+        <div class="card-body">
+            <h2 class="card-title">@Model.Movie.Title</h2>
+
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><strong>Thể loại:</strong> @Model.Movie.Genre</li>
+                <li class="list-group-item"><strong>Thời lượng:</strong> @Model.Movie.Duration phút</li>
+                <li class="list-group-item"><strong>Độ tuổi:</strong> @Model.Movie.AgeRequest+</li>
+                <li class="list-group-item"><strong>Ngày phát hành:</strong> @Model.Movie.ReleaseDate.ToString("dd/MM/yyyy")</li>
+            </ul>
+
+            <form method="get" asp-controller="CustomerMovies" asp-action="Details" class="mb-3">
+                <input type="hidden" name="id" value="@Model.Movie.MovieID" />
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2">Chọn ngày:</label>
+                    <div class="col-sm-4">
+                        <input type="date" name="selectedDate" value="@Model.SelectedDate" class="form-control" onchange="this.form.submit()" />
+                    </div>
+                </div>
+            </form>
+
+            @if (Model.Showtimes != null && Model.Showtimes.Count > 0)
+            {
+                <h5 class="mt-4">Xuất chiếu ngày @DateTime.Parse(Model.SelectedDate).ToString("dd/MM/yyyy"):</h5>
+
+                <div class="row">
+                    @foreach (var show in Model.Showtimes)
+                    {
+                        <div class="col-md-3 mb-3">
+                            <a asp-controller="Booking"
+                               asp-action="BookTicket"
+                               asp-route-showtimeId="@show.ShowTimeID"
+                               class="btn btn-outline-success w-100">
+                                @show.StartTime.ToString("HH:mm") - @show.Room.RoomName
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning mt-4">
+                    Không có xuất chiếu nào cho ngày này.
+                </div>
+            }
+        </div>
+    </div>
+</div>

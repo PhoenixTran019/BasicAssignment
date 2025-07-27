@@ -44,6 +44,16 @@
                             <li class="nav-item"><a class="nav-link" asp-controller="Cinema" asp-action="Index">Cinemas</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Items" asp-action="Index">Items</a></li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Foods" asp-action="Index">Foods</a></li>
+                            <li class="nav-item dropdown">
+                                <a class=" nav-link dropdown-toggle" href="#" id="itemsDropdow" role="button">
+                                    Foods
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="itemDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Foods" asp-action="Index">Foods</a></li>
+                                    <li><a class="dropdown-item" asp-controller="FoodsItems" asp-action="IndexAllFormula">Employees Cinemas</a></li>
+
+                                </ul>
+                            </li>
                             <li class="nav-item"><a class="nav-link" asp-controller="Movies" asp-action="Index">Movies</a></li>
                             <li class="nav-item dropdown">
                                 <a class=" nav-link dropdown-toggle" href="#" id="itemsDropdow" role="button">
@@ -82,7 +92,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Auth" asp-action="Register">
+                                <a class="nav-link" asp-controller="CustomerAuth" asp-action="Register">
                                     <i class="bi bi-person-plus-fill"></i> Đăng ký
                                 </a>
                             </li>

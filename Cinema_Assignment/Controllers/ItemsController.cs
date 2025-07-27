@@ -24,6 +24,21 @@ namespace Cinema_Assignment.Controllers
             return HttpContext.Session.GetString("UserType") == "Employee" && HttpContext.Session.GetInt32("UserRoll") == 1;
         }
 
+        public int GenerateNextItemID()
+        {
+            int nextID = 99999;
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT ISNULL(MAX(ItemID), 99999) + 1 FROM Items";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                nextID = (int)cmd.ExecuteScalar();
+            }
+
+            return nextID;
+        }
+
         public IActionResult Index(ItemModel item)
         {
             if (!IsAdmin())
@@ -54,6 +69,10 @@ namespace Cinema_Assignment.Controllers
 
         public IActionResult CreateItems()
         {
+            var item = new ItemModel
+            {
+                ItemID = GenerateNextItemID()
+            };
             ViewBag.UnitList = new SelectList(new List<string>
     {
         "Cái", "Hộp", "Kg", "Thùng", "Chai"
@@ -64,10 +83,46 @@ namespace Cinema_Assignment.Controllers
         "Thực phẩm", "Đồ gia dụng", "Đồ uống", "Thiết bị"
     });
 
-            return View();
+           
+            return View(item);
         }
 
+        [HttpPost]
+        public IActionResult CreateItems(ItemModel item)
+        {
+            if (!IsAdmin())
+            {
+                HttpContext.Session.Clear();
+                return RedirectToAction("Login", "Auth");
+            }
 
+            if (!ModelState.IsValid)
+            {
+                ViewBag.UnitList = new SelectList(new List<string> { "Cái", "Hộp", "Kg", "Thùng", "Chai" });
+                ViewBag.CategoryList = new SelectList(new List<string> { "Thực phẩm", "Đồ gia dụng", "Đồ uống", "Thiết bị" });
+                return View(item);
+            }
+
+            item.ItemID = GenerateNextItemID();
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                string query = @"
+            INSERT INTO Items (ItemID, ItemName, Unit, QuanlityPerUnit, Category, Description)
+            VALUES (@ItemID, @ItemName, @Unit, @QuanlityPerUnit, @Category, @Description)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ItemID", item.ItemID);
+                cmd.Parameters.AddWithValue("@ItemName", item.ItemName ?? "");
+                cmd.Parameters.AddWithValue("@Unit", item.Unit ?? "");
+                cmd.Parameters.AddWithValue("@QuanlityPerUnit", item.QuanlityPerUnit);
+                cmd.Parameters.AddWithValue("@Category", item.Category ?? "");
+                cmd.Parameters.AddWithValue("@Description", item.Description ?? "");
+                cmd.ExecuteNonQuery();
+            }
+
+            return RedirectToAction("Index");
+        }
 
         [HttpGet]
         public IActionResult EditItems(int id)

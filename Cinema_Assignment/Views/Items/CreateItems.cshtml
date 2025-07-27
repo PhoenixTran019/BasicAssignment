@@ -4,9 +4,10 @@
     <h2 class="text-primary mb-4">➕ Thêm mặt hàng mới</h2>
 
     <form asp-action="CreateItems" method="post" class="card shadow-sm p-4">
-        <div class="mb-3">
-            <label asp-for="ItemID" class="form-label">Mã mặt hàng (ItemID)</label>
-            <input asp-for="ItemID" class="form-control" type="number" required />
+        <div class="form-group">
+            <label asp-for="ItemID"></label>
+            <input asp-for="ItemID" class="form-control" readonly />
+            <input type="hidden" asp-for="ItemID" />
         </div>
 
         <div class="mb-3">
@@ -15,14 +16,22 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="Unit" class="form-label">Đơn vị</label>
-            <select asp-for="Unit" class="form-select" asp-items="ViewBag.UnitList" id="unitSelect" required>
+            <label class="form-label">Đơn vị</label>
+            <select class="form-select" id="unitSelect" required>
                 <option value="">-- Chọn đơn vị --</option>
+                <option value="Cái">Cái</option>
+                <option value="Hộp">Hộp</option>
+                <option value="Kg">Kg</option>
+                <option value="Thùng">Thùng</option>
+                <option value="Chai">Chai</option>
                 <option value="Khác">Khác</option>
             </select>
 
-            <input type="text" class="form-control mt-2" id="unitCustom" name="Unit" placeholder="Nhập đơn vị khác"
+            <input type="text" class="form-control mt-2" id="unitCustom" placeholder="Nhập đơn vị khác"
                    style="display:none;" />
+
+            <!-- Field ẩn để model binding về Item.Unit -->
+            <input type="hidden" asp-for="Unit" id="unitFinal" />
         </div>
 
         <div class="mb-3">
@@ -31,14 +40,20 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="Category" class="form-label">Loại</label>
-            <select asp-for="Category" class="form-select" asp-items="ViewBag.CategoryList" id="categorySelect" required>
+            <label class="form-label">Loại</label>
+            <select class="form-select" id="categorySelect" required>
                 <option value="">-- Chọn loại --</option>
+                <option value="Thực phẩm">Thực phẩm</option>
+                <option value="Đồ gia dụng">Đồ gia dụng</option>
+                <option value="Đồ uống">Đồ uống</option>
+                <option value="Thiết bị">Thiết bị</option>
                 <option value="Khác">Khác</option>
             </select>
 
-            <input type="text" class="form-control mt-2" id="categoryCustom" name="Category" placeholder="Nhập loại khác"
+            <input type="text" class="form-control mt-2" id="categoryCustom" placeholder="Nhập loại khác"
                    style="display:none;" />
+
+            <input type="hidden" asp-for="Category" id="categoryFinal" />
         </div>
 
 
@@ -58,38 +73,44 @@
     document.addEventListener("DOMContentLoaded", function () {
         const unitSelect = document.getElementById("unitSelect");
         const unitCustom = document.getElementById("unitCustom");
+        const unitFinal = document.getElementById("unitFinal");
 
         const categorySelect = document.getElementById("categorySelect");
         const categoryCustom = document.getElementById("categoryCustom");
+        const categoryFinal = document.getElementById("categoryFinal");
 
         unitSelect.addEventListener("change", function () {
             if (this.value === "Khác") {
                 unitCustom.style.display = "block";
                 unitCustom.required = true;
-                unitSelect.name = "Unit_Ignore"; // Đổi tên để tránh bị ghi đè
-                unitCustom.name = "Unit";
+                unitFinal.value = "";
             } else {
                 unitCustom.style.display = "none";
                 unitCustom.required = false;
                 unitCustom.value = "";
-                unitSelect.name = "Unit";
-                unitCustom.name = "Unit_Ignore";
+                unitFinal.value = this.value;
             }
+        });
+
+        unitCustom.addEventListener("input", function () {
+            unitFinal.value = this.value;
         });
 
         categorySelect.addEventListener("change", function () {
             if (this.value === "Khác") {
                 categoryCustom.style.display = "block";
                 categoryCustom.required = true;
-                categorySelect.name = "Category_Ignore";
-                categoryCustom.name = "Category";
+                categoryFinal.value = "";
             } else {
                 categoryCustom.style.display = "none";
                 categoryCustom.required = false;
                 categoryCustom.value = "";
-                categorySelect.name = "Category";
-                categoryCustom.name = "Category_Ignore";
+                categoryFinal.value = this.value;
             }
+        });
+
+        categoryCustom.addEventListener("input", function () {
+            categoryFinal.value = this.value;
         });
     });
 </script>

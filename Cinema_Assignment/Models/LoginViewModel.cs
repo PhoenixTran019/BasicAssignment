@@ -2,7 +2,7 @@
 {
     public class LoginViewModel
     {
-        public string Username { get; set; }
+        public string Identifier { get; set; } // Could be Email or Phone Number
         public string Password { get; set; }
     }
 }

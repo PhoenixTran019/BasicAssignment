@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Cinema_Assignment.Models.MovieModel>
+
+<h2 class="mb-4">🎬 Danh sách phim</h2>
+
+<div class="row">
+    @foreach (var movie in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0 h-100 position-relative">
+                <img src="@movie.Image" class="card-img-top" alt="@movie.Title" style="height: 340px; object-fit: cover;">
+
+                
+
+                <div class="card-body p-3">
+                    <h6 class="card-title text-success fw-bold text-uppercase text-truncate" title="@movie.Title">
+                        @movie.Title
+                    </h6>
+                    <p class="card-text text-muted mb-1">
+                        Ngày phát hành: @movie.ReleaseDate.ToString("dd/MM/yyyy")
+                    </p>
+                    <p class="card-text text-muted mb-1">
+                        Thời lượng: @movie.Duration phút
+                    </p>
+                    <p class="card-text">
+                        Thể loại phim: <span class="text-primary">@movie.Genre</span>
+                    </p>
+
+                    <a asp-controller="CustomerMovies" asp-action="Details" asp-route-id="@movie.MovieID" class="btn btn-outline-primary btn-sm w-100 mt-2">
+                        Xem chi tiết
+                    </a>
+
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

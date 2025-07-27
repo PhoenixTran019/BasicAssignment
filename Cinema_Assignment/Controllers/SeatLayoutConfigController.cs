@@ -18,6 +18,21 @@ namespace Cinema_Assignment.Controllers
             return HttpContext.Session.GetString("UserType") == "Employee" && HttpContext.Session.GetInt32("UserRoll") == 1;
         }
 
+        public int GenerateNextLayoutID()
+        {
+            int nextID = 99999;
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT ISNULL(MAX(LayoutID), 99999) + 1 FROM SeatLayoutConfigs";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                nextID = (int)cmd.ExecuteScalar();
+            }
+
+            return nextID;
+        }
+
         private int GetCinemaIdByRoom(int roomId)
         {
             using var conn = new SqlConnection(_connectionString);
@@ -76,24 +91,14 @@ namespace Cinema_Assignment.Controllers
 
             var model = new SeatLayoutConfigModel
             {
-                RoomID = roomId
+                RoomID = roomId,
+                LayoutID = GenerateNextLayoutID(),
             };
 
             // Load Seat Types List
             var seatTypes = new List<SelectListItem>();
-            using var conn = new SqlConnection(_connectionString);
-            conn.Open();
-            var cmd = new SqlCommand("SELECT TypeID, TypeName FROM SeatTypes", conn);
-            var reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                seatTypes.Add(new SelectListItem
-                {
-                    Value = reader["TypeID"].ToString(),
-                    Text = reader["TypeName"].ToString()
-                });
-            }
-            ViewBag.SeatTypes = seatTypes;
+            
+            ViewBag.SeatTypes = LoadSeatTypes();
 
             return View(model);
         }
@@ -103,14 +108,14 @@ namespace Cinema_Assignment.Controllers
             var list = new List<SelectListItem>();
             using var conn = new SqlConnection(_connectionString);
             conn.Open();
-            var cmd = new SqlCommand("SELECT TypeID, TypeName FROM SeatTypes", conn);
+            var cmd = new SqlCommand("SELECT TypeID, Decription FROM SeatTypes", conn);
             var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 list.Add(new SelectListItem
                 {
                     Value = reader["TypeID"].ToString(),
-                    Text = reader["TypeName"].ToString()
+                    Text = reader["Decription"].ToString()
                 });
             }
             return list;
@@ -128,34 +133,17 @@ namespace Cinema_Assignment.Controllers
 
             if (!ModelState.IsValid)
             {
-                // Load lại SeatTypes nếu có lỗi để giữ form
-                using var conn = new SqlConnection(_connectionString);
-                conn.Open();
-
-                var seatTypes = new List<SelectListItem>();
-                var cmdType = new SqlCommand("SELECT TypeID, TypeName FROM SeatTypes", conn);
-                var reader = cmdType.ExecuteReader();
-                while (reader.Read())
-                {
-                    seatTypes.Add(new SelectListItem
-                    {
-                        Value = reader["TypeID"].ToString(),
-                        Text = reader["TypeName"].ToString()
-                    });
-                }
-
-                ViewBag.SeatTypes = seatTypes;
-
+                ViewBag.SeatTypes = LoadSeatTypes();
                 return View(model);
             }
 
-            using var connInsert = new SqlConnection(_connectionString);
-            connInsert.Open();
+            using var conn = new SqlConnection(_connectionString);
+            conn.Open();
 
+            // Insert layout
             var cmd = new SqlCommand(@"
-        INSERT INTO SeatLayoutConfigs
-        (LayoutID, RoomID, StartRow, EndRow, StartCol, EndCol, SeatType)
-        VALUES (@LayoutID, @RoomID, @StartRow, @EndRow, @StartCol, @EndCol, @SeatType)", connInsert);
+                INSERT INTO SeatLayoutConfigs (LayoutID, RoomID, StartRow, EndRow, StartCol, EndCol, SeatType)
+                VALUES (@LayoutID, @RoomID, @StartRow, @EndRow, @StartCol, @EndCol, @SeatType)", conn);
 
             cmd.Parameters.AddWithValue("@LayoutID", model.LayoutID);
             cmd.Parameters.AddWithValue("@RoomID", model.RoomID);
@@ -164,8 +152,30 @@ namespace Cinema_Assignment.Controllers
             cmd.Parameters.AddWithValue("@StartCol", model.StartCol);
             cmd.Parameters.AddWithValue("@EndCol", model.EndCol);
             cmd.Parameters.AddWithValue("@SeatType", model.SeatType);
-
             cmd.ExecuteNonQuery();
+
+            // Tạo ghế tương ứng
+            for (char row = model.StartRow; row <= model.EndRow; row++)
+            {
+                for (int col = model.StartCol; col <= model.EndCol; col++)
+                {
+                    string seatID = $"{model.RoomID}_{row}{col}";
+                    string seatName = $"{row}{col}";
+
+                    var seatCmd = new SqlCommand(@"
+                        INSERT INTO Seats (SeatID, SeatName, RowChar, ColumNum, RoomID, TypeID, IsDisabled)
+                        VALUES (@SeatID, @SeatName, @RowChar, @ColumNum, @RoomID, @TypeID, 0)", conn);
+
+                    seatCmd.Parameters.AddWithValue("@SeatID", seatID);
+                    seatCmd.Parameters.AddWithValue("@SeatName", seatName);
+                    seatCmd.Parameters.AddWithValue("@RowChar", row);
+                    seatCmd.Parameters.AddWithValue("@ColumNum", col);
+                    seatCmd.Parameters.AddWithValue("@RoomID", model.RoomID);
+                    seatCmd.Parameters.AddWithValue("@TypeID", model.SeatType);
+
+                    seatCmd.ExecuteNonQuery();
+                }
+            }
 
             return RedirectToAction("Index", new { roomId = model.RoomID });
         }
@@ -201,20 +211,7 @@ namespace Cinema_Assignment.Controllers
             }
             reader.Close();
 
-            // Load loại ghế
-            var seatTypes = new List<SelectListItem>();
-            var seatTypeCmd = new SqlCommand("SELECT TypeID, TypeName FROM SeatTypes", conn);
-            var seatTypeReader = seatTypeCmd.ExecuteReader();
-            while (seatTypeReader.Read())
-            {
-                seatTypes.Add(new SelectListItem
-                {
-                    Value = seatTypeReader["TypeID"].ToString(),
-                    Text = seatTypeReader["TypeName"].ToString()
-                });
-            }
-
-            ViewBag.SeatTypes = seatTypes;
+            ViewBag.SeatTypes = LoadSeatTypes();
 
             return View(model);
         }
@@ -222,22 +219,24 @@ namespace Cinema_Assignment.Controllers
         [HttpPost]
         public IActionResult EditLayout(SeatLayoutConfigModel model)
         {
-
             if (!IsAdmin())
-            {
-                HttpContext.Session.Clear();
                 return RedirectToAction("Login", "Auth");
-            }
 
             using var conn = new SqlConnection(_connectionString);
             conn.Open();
 
+            // Xoá ghế cũ
+            var deleteSeats = new SqlCommand("DELETE FROM Seats WHERE RoomID = @RoomID", conn);
+            deleteSeats.Parameters.AddWithValue("@RoomID", model.RoomID);
+            deleteSeats.ExecuteNonQuery();
+
+            // Cập nhật layout
             var cmd = new SqlCommand(@"
-                Update SeatLayoutConfigs
-                Set StartRow = @StartRow,EndRow = @EndRow,
+                UPDATE SeatLayoutConfigs
+                SET StartRow = @StartRow, EndRow = @EndRow,
                     StartCol = @StartCol, EndCol = @EndCol,
                     SeatType = @SeatType
-                Where LayoutID = @LayoutID", conn);
+                WHERE LayoutID = @LayoutID", conn);
 
             cmd.Parameters.AddWithValue("@LayoutID", model.LayoutID);
             cmd.Parameters.AddWithValue("@StartRow", model.StartRow);
@@ -245,8 +244,30 @@ namespace Cinema_Assignment.Controllers
             cmd.Parameters.AddWithValue("@StartCol", model.StartCol);
             cmd.Parameters.AddWithValue("@EndCol", model.EndCol);
             cmd.Parameters.AddWithValue("@SeatType", model.SeatType);
-
             cmd.ExecuteNonQuery();
+
+            // Tạo lại ghế
+            for (char row = model.StartRow; row <= model.EndRow; row++)
+            {
+                for (int col = model.StartCol; col <= model.EndCol; col++)
+                {
+                    string seatID = $"{model.RoomID}_{row}{col}";
+                    string seatName = $"{row}{col}";
+
+                    var seatCmd = new SqlCommand(@"
+                        INSERT INTO Seats (SeatID, SeatName, RowChar, ColumNum, RoomID, TypeID, IsDisabled)
+                        VALUES (@SeatID, @SeatName, @RowChar, @ColumNum, @RoomID, @TypeID, 0)", conn);
+
+                    seatCmd.Parameters.AddWithValue("@SeatID", seatID);
+                    seatCmd.Parameters.AddWithValue("@SeatName", seatName);
+                    seatCmd.Parameters.AddWithValue("@RowChar", row);
+                    seatCmd.Parameters.AddWithValue("@ColumNum", col);
+                    seatCmd.Parameters.AddWithValue("@RoomID", model.RoomID);
+                    seatCmd.Parameters.AddWithValue("@TypeID", model.SeatType);
+
+                    seatCmd.ExecuteNonQuery();
+                }
+            }
 
             return RedirectToAction("Index", new { roomId = model.RoomID });
         }
@@ -265,20 +286,39 @@ namespace Cinema_Assignment.Controllers
             var roomCmd = new SqlCommand("SELECT RoomID FROM SeatLayoutConfigs WHERE LayoutID = @id", conn);
             roomCmd.Parameters.AddWithValue("@id", id);
             var result = roomCmd.ExecuteScalar();
-
             if (result == null)
-            {
-                TempData["Error"] = "Không tìm thấy Layout cần xoá.";
                 return RedirectToAction("Index", "Rooms");
-            }
 
             int roomId = (int)result;
 
-            var cmd = new SqlCommand("DELETE FROM SeatLayoutConfigs WHERE LayoutID = @id", conn);
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.ExecuteNonQuery();
+            // Xoá ghế thuộc layout
+            var deleteSeats = new SqlCommand("DELETE FROM Seats WHERE RoomID = @RoomID", conn);
+            deleteSeats.Parameters.AddWithValue("@RoomID", roomId);
+            deleteSeats.ExecuteNonQuery();
+
+            // Xoá layout
+            var deleteLayout = new SqlCommand("DELETE FROM SeatLayoutConfigs WHERE LayoutID = @id", conn);
+            deleteLayout.Parameters.AddWithValue("@id", id);
+            deleteLayout.ExecuteNonQuery();
 
             return RedirectToAction("Index", new { roomId = roomId });
+        }
+
+        public IActionResult ToggleSeatDisable(string seatId)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Auth");
+
+            using var conn = new SqlConnection(_connectionString);
+            conn.Open();
+
+            var cmd = new SqlCommand(@"
+                UPDATE Seats
+                SET IsDisabled = IIF(IsDisabled = 1, 0, 1)
+                WHERE SeatID = @seatId", conn);
+            cmd.Parameters.AddWithValue("@seatId", seatId);
+            cmd.ExecuteNonQuery();
+
+            return Ok(); // hoặc Redirect lại layout nếu cần
         }
 
     }

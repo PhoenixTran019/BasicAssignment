@@ -483,6 +483,14 @@ CREATE TABLE Foods_CinemasStock (
 );
 go
 
+CREATE TABLE Seats_ShowtimesLocked (
+    SeatID NVARCHAR(10),
+    ShowtimeID INT,
+    PRIMARY KEY (SeatID, ShowtimeID),
+    FOREIGN KEY (SeatID) REFERENCES Seats(SeatID),
+    FOREIGN KEY (ShowtimeID) REFERENCES Showtimes(ShowtimeID)
+);
+go
 	CREATE TABLE Foods_Items (
     FoodID INT,
     ItemID INT,

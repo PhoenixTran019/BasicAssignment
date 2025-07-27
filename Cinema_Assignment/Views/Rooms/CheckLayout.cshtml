@@ -1,21 +1,14 @@
-﻿@model IEnumerable<Cinema_Assignment.Models.SeatLayoutDisplayModel>
+﻿@model IEnumerable<Cinema_Assignment.Models.SeatModel>
 
 @{
     ViewBag.Title = "Kiểm tra sơ đồ ghế";
-    var layouts = Model.ToList();
-    var minRow = layouts.Min(l => l.StartRow);
-    var maxRow = layouts.Max(l => l.EndRow);
-    var maxCol = layouts.Max(l => l.EndCol);
+    var seats = Model.ToList();
+    var minRow = seats.Min(s => s.RowChar);
+    var maxRow = seats.Max(s => s.RowChar);
+    var maxCol = seats.Max(s => s.ColumNum);
 }
 
 <style>
-    .seat-grid {
-        display: grid;
-        grid-template-columns: repeat( @maxCol, 45px);
-        gap: 5px;
-        margin-bottom: 10px;
-    }
-
     .seat {
         width: 45px;
         height: 45px;
@@ -35,6 +28,11 @@
         background-color: #f9d923;
     }
 
+    .locked {
+        background-color: #999 !important;
+        cursor: not-allowed;
+    }
+
     .selected {
         background-color: #00cc44 !important;
         color: #fff;
@@ -42,6 +40,7 @@
 
     .legend {
         display: flex;
+        flex-wrap: wrap;
         gap: 15px;
         margin-bottom: 20px;
     }
@@ -57,6 +56,11 @@
         margin-right: 5px;
         border: 1px solid #333;
     }
+
+    .sticky-box {
+        position: sticky;
+        top: 20px;
+    }
 </style>
 
 <div class="container mt-4">
@@ -65,45 +69,60 @@
     <div class="legend">
         <div class="legend-item"><div class="legend-color" style="background:#ccc;"></div> Standard</div>
         <div class="legend-item"><div class="legend-color" style="background:#f9d923;"></div> VIP</div>
+        <div class="legend-item"><div class="legend-color" style="background:#999;"></div> Ghế bị khoá</div>
         <div class="legend-item"><div class="legend-color" style="background:#00cc44;"></div> Ghế đã chọn</div>
     </div>
 
-    @for (char row = minRow; row <= maxRow; row++)
-    {
-        <div class="d-flex align-items-center mb-2">
-            <strong style="width:30px;">@row</strong>
-            <div class="seat-grid">
-                @for (int col = 1; col <= maxCol; col++)
-                {
-                    var seatCode = $"{row}{col}";
-                    var layoutForSeat = layouts.FirstOrDefault(l =>
-                    row >= l.StartRow && row <= l.EndRow &&
-                    col >= l.StartCol && col <= l.EndCol
-                    );
+    <div class="row">
+        <!-- Seat Layout -->
+        <div class="col-md-9">
+            @for (char row = minRow; row <= maxRow; row++)
+            {
+                <div class="d-flex align-items-center mb-2">
+                    <strong style="width:30px;">@row</strong>
+                    <div class="d-grid" style="grid-template-columns: repeat(@maxCol, 45px); gap: 5px;">
+                        @for (int col = 1; col <= maxCol; col++)
+                        {
+                            var seat = seats.FirstOrDefault(s => s.RowChar == row && s.ColumNum == col);
+                            if (seat != null)
+                            {
+                                var seatClass = "seat " + (seat.Decription == "VIP" ? "vip" : "standard");
+                                if (seat.IsLock || seat.IsBooked) seatClass += " locked";
 
-                    if (layoutForSeat != null)
-                    {
-                        var seatClass = layoutForSeat.TypeName == "Standard" ? "seat standard" : "seat vip";
+                                <div class="@seatClass"
+                                     data-seat="@seat.SeatName"
+                                     data-price="@seat.Price"
+                                     data-locked="@seat.IsLock.ToString().ToLower()"
+                                     data-booked="@seat.IsBooked.ToString().ToLower()"
+                                     title="@(seat.IsLock ? "Khoá cứng" : seat.IsBooked ? "Đã đặt vé" : $"Giá: {seat.Price:N0}đ")">
+                                    @seat.SeatName
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="seat" style="visibility:hidden;">-</div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
 
-                        <div class="@seatClass"
-                             data-seat="@seatCode"
-                             data-type="@layoutForSeat.TypeName"
-                             data-price="@layoutForSeat.Price">
-                            @seatCode
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="seat" style="visibility:hidden;">-</div>
-                    }
-                }
+        <!-- Right Panel -->
+        <div class="col-md-3">
+            <div class="card sticky-box">
+                <div class="card-body">
+                    <h5 class="card-title">🎟️ Ghế đã chọn</h5>
+                    <p id="selected-seats">Chưa chọn ghế nào.</p>
+                    <p id="total-price" class="fw-bold text-success">Tổng tiền: 0đ</p>
+                </div>
+                <hr />
+                <div class="d-grid gap-2">
+                    <button id="toggle-lock-btn" class="btn btn-warning" disabled>🔒 Khóa/Mở ghế</button>
+                </div>
             </div>
         </div>
-    }
-
-    <h5>Ghế đã chọn:</h5>
-    <p id="selected-seats">Chưa chọn ghế nào.</p>
-    <p id="total-price">Tổng tiền: 0đ</p>
+    </div>
 </div>
 
 <script>
@@ -113,32 +132,70 @@
         seat.addEventListener('click', function () {
             if (this.style.visibility === 'hidden') return;
 
-            const code = this.getAttribute('data-seat');
-            const price = parseFloat(this.getAttribute('data-price'));
+            const code = this.dataset.seat;
+            const price = parseFloat(this.dataset.price);
+            const isLocked = this.dataset.locked === 'true';
+            const isBooked = this.dataset.booked === 'true';
+
+            if (isBooked) return;
 
             if (this.classList.contains('selected')) {
                 this.classList.remove('selected');
-                selectedSeats.splice(selectedSeats.findIndex(s => s.code === code), 1);
+                const idx = selectedSeats.findIndex(s => s.code === code);
+                if (idx !== -1) selectedSeats.splice(idx, 1);
             } else {
                 this.classList.add('selected');
-                selectedSeats.push({ code: code, price: price });
+                selectedSeats.push({ code, price, isLocked });
             }
 
             updateSummary();
+            enableLockButton();
         });
     });
 
     function updateSummary() {
+        const seatStr = selectedSeats.map(s => s.code).join(", ");
+        const total = selectedSeats.reduce((sum, s) => sum + s.price, 0);
+        document.getElementById('selected-seats').innerText = selectedSeats.length > 0 ? `Ghế: ${seatStr}` : "Chưa chọn ghế nào.";
+        document.getElementById('total-price').innerText = "Tổng tiền: " + total.toLocaleString('vi-VN') + "đ";
+    }
+
+    function enableLockButton() {
+        const btn = document.getElementById("toggle-lock-btn");
         if (selectedSeats.length === 0) {
-            document.getElementById('selected-seats').innerText = "Chưa chọn ghế nào.";
-            document.getElementById('total-price').innerText = "Tổng tiền: 0đ";
+            btn.disabled = true;
+            btn.innerText = "🔒 Khóa/Mở ghế";
             return;
         }
 
-        const names = selectedSeats.map(s => s.code).join(', ');
-        const total = selectedSeats.reduce((sum, s) => sum + s.price, 0);
+        const allLocked = selectedSeats.every(s => s.isLocked);
+        const allUnlocked = selectedSeats.every(s => !s.isLocked);
 
-        document.getElementById('selected-seats').innerText = "Ghế: " + names;
-        document.getElementById('total-price').innerText = "Tổng tiền: " + total.toLocaleString('vi-VN') + "đ";
+        if (allLocked) {
+            btn.disabled = false;
+            btn.innerText = "🔓 Mở khóa ghế";
+        } else if (allUnlocked) {
+            btn.disabled = false;
+            btn.innerText = "🔒 Khóa ghế";
+        } else {
+            btn.disabled = true;
+            btn.innerText = "Không thể thao tác nhiều trạng thái";
+        }
     }
+
+    document.getElementById("toggle-lock-btn").addEventListener("click", function () {
+        const seatNames = selectedSeats.map(s => s.code);
+        fetch('@Url.Action("ToggleMultipleSeats", "Rooms")', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                seatNames: seatNames,
+                roomId: @ViewBag.RoomID
+            })
+        })
+        .then(res => {
+            if (res.ok) location.reload();
+            else alert("Không thể cập nhật trạng thái.");
+        });
+    });
 </script>

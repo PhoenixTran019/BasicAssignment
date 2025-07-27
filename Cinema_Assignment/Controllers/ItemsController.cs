@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Cinema_Assignment.Controllers
@@ -67,28 +68,7 @@ namespace Cinema_Assignment.Controllers
             return View(items);
         }
 
-        public IActionResult CreateItems()
-        {
-            var item = new ItemModel
-            {
-                ItemID = GenerateNextItemID()
-            };
-            ViewBag.UnitList = new SelectList(new List<string>
-    {
-        "Cái", "Hộp", "Kg", "Thùng", "Chai"
-    });
-
-            ViewBag.CategoryList = new SelectList(new List<string>
-    {
-        "Thực phẩm", "Đồ gia dụng", "Đồ uống", "Thiết bị"
-    });
-
-           
-            return View(item);
-        }
-
-        [HttpPost]
-        public IActionResult CreateItems(ItemModel item)
+        public IActionResult CreateItem()
         {
             if (!IsAdmin())
             {
@@ -96,32 +76,67 @@ namespace Cinema_Assignment.Controllers
                 return RedirectToAction("Login", "Auth");
             }
 
-            if (!ModelState.IsValid)
+            var item = new ItemModel
             {
-                ViewBag.UnitList = new SelectList(new List<string> { "Cái", "Hộp", "Kg", "Thùng", "Chai" });
-                ViewBag.CategoryList = new SelectList(new List<string> { "Thực phẩm", "Đồ gia dụng", "Đồ uống", "Thiết bị" });
-                return View(item);
+                ItemID = GenerateNextItemID()
+            };
+
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult CreateItem(ItemModel item)
+        {
+
+            if (!IsAdmin())
+            {
+                HttpContext.Session.Clear();
+                return RedirectToAction("Login", "Auth");
             }
 
-            item.ItemID = GenerateNextItemID();
+            int newItemId = 0;
 
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using var conn = new SqlConnection(_connectionString);
+            conn.Open();
+
+            var cmd = new SqlCommand(@"
+            INSERT INTO Items (ItemID,ItemName, Unit, QuanlityPerUnit, Category, Description)
+            OUTPUT INSERTED.ItemID
+            VALUES (@ID,@Name, @Unit, @QtyPerUnit, @Category, @Description)", conn);
+
+            cmd.Parameters.AddWithValue("@ID", item.ItemID);
+            cmd.Parameters.AddWithValue("@Name", item.ItemName);
+            cmd.Parameters.AddWithValue("@Unit", item.Unit);
+            cmd.Parameters.AddWithValue("@QtyPerUnit", item.QuanlityPerUnit);
+            cmd.Parameters.AddWithValue("@Category", item.Category);
+            cmd.Parameters.AddWithValue("@Description", string.IsNullOrEmpty(item.Description) ? DBNull.Value : item.Description);
+
+            newItemId = (int)cmd.ExecuteScalar();
+
+            var cinemaCmd = new SqlCommand("SELECT CinemaID FROM Cinemas", conn);
+            var reader = cinemaCmd.ExecuteReader();
+            var cinemaIds = new List<int>();
+
+            while (reader.Read())
+                cinemaIds.Add((int)reader["CinemaID"]);
+
+            reader.Close();
+
+            foreach (var cinemaId in cinemaIds)
             {
-                conn.Open();
-                string query = @"
-            INSERT INTO Items (ItemID, ItemName, Unit, QuanlityPerUnit, Category, Description)
-            VALUES (@ItemID, @ItemName, @Unit, @QuanlityPerUnit, @Category, @Description)";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ItemID", item.ItemID);
-                cmd.Parameters.AddWithValue("@ItemName", item.ItemName ?? "");
-                cmd.Parameters.AddWithValue("@Unit", item.Unit ?? "");
-                cmd.Parameters.AddWithValue("@QuanlityPerUnit", item.QuanlityPerUnit);
-                cmd.Parameters.AddWithValue("@Category", item.Category ?? "");
-                cmd.Parameters.AddWithValue("@Description", item.Description ?? "");
-                cmd.ExecuteNonQuery();
-            }
+                var insertStockCmd = new SqlCommand(@"
+                INSERT INTO Cinemas_ItemsStock (CinemaID, ItemID, Quantity, Note, IsActive)
+                VALUES (@CinemaID, @ItemID, @Quantity, @Note, 1-)", conn);
 
+                insertStockCmd.Parameters.AddWithValue("@CinemaID", cinemaId);
+                insertStockCmd.Parameters.AddWithValue("@ItemID", newItemId);
+                insertStockCmd.Parameters.AddWithValue("@Quantity", 0);
+                insertStockCmd.Parameters.AddWithValue("@Note", $"Khởi tạo bởi Admin. SL/SP: {item.QuanlityPerUnit}");
+
+                insertStockCmd.ExecuteNonQuery();
+            }
             return RedirectToAction("Index");
+
         }
 
         [HttpGet]

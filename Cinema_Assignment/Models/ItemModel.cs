@@ -7,7 +7,7 @@
         public string Unit { get; set; }
         public int QuanlityPerUnit { get; set; }
         public string Category { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public bool IsActive { get; set; }
         public int Quantity { get; set; }
     }

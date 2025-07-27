@@ -220,12 +220,16 @@ namespace Cinema_Assignment.Controllers
             conn.Open();
 
             var cmd = new SqlCommand(@"
-        SELECT s.SeatName, s.RowChar, s.ColumNum, s.IsLock,
-               t.TypeName, t.Price
+        SELECT s.SeatName, s.RowChar, s.ColumNum, s.IsLocked, 
+               t.TypeName, t.Price,
+               CASE WHEN EXISTS (
+                   SELECT 1 FROM Tickets tk WHERE tk.SeatID = s.SeatID
+               ) THEN 1 ELSE 0 END AS IsBooked
         FROM Seats s
-        JOIN SeatTypes t ON s.SeatType = t.TypeID
+        JOIN SeatTypes t ON s.TypeID = t.TypeID
         WHERE s.RoomID = @RoomID
     ", conn);
+
             cmd.Parameters.AddWithValue("@RoomID", roomId);
 
             var reader = cmd.ExecuteReader();
@@ -238,13 +242,44 @@ namespace Cinema_Assignment.Controllers
                     ColumNum = (int)reader["ColumNum"],
                     Decription = reader["TypeName"].ToString(),
                     Price = (decimal)reader["Price"],
-                    IsLock = (bool)reader["IsLock"]
+                    IsLock = Convert.ToInt32(reader["IsLocked"]) == 1,
+                    IsBooked = Convert.ToInt32(reader["IsBooked"]) == 1 // THÊM DÒNG NÀY
                 });
             }
 
             ViewBag.RoomID = roomId;
             return View(seats);
         }
+
+
+
+        [HttpPost]
+        public IActionResult ToggleMultipleSeats([FromBody] ToggleSeatsRequest request)
+        {
+            using var conn = new SqlConnection(_connectionString);
+            conn.Open();
+
+            foreach (var seatName in request.SeatNames)
+            {
+                var checkCmd = new SqlCommand("SELECT IsLocked FROM Seats WHERE SeatName = @SeatName AND RoomID = @RoomID", conn);
+                checkCmd.Parameters.AddWithValue("@SeatName", seatName);
+                checkCmd.Parameters.AddWithValue("@RoomID", request.RoomId);
+
+                var current = (int?)checkCmd.ExecuteScalar();
+                if (current == null) continue;
+
+                int newStatus = (int)current == 1 ? 0 : 1;
+
+                var updateCmd = new SqlCommand("UPDATE Seats SET IsLocked = @IsLocked WHERE SeatName = @SeatName AND RoomID = @RoomID", conn);
+                updateCmd.Parameters.AddWithValue("@IsLocked", newStatus);
+                updateCmd.Parameters.AddWithValue("@SeatName", seatName);
+                updateCmd.Parameters.AddWithValue("@RoomID", request.RoomId);
+                updateCmd.ExecuteNonQuery();
+            }
+
+            return Ok();
+        }
+
 
 
 

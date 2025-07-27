@@ -8,6 +8,7 @@
         public int ColumNum { get; set; }
         public int TypeID { get; set; }
         public bool IsLock { get; set; }
+        public bool IsBooked { get; set; }
         public string Decription { get; set; }
         public decimal Price { get; set; }
     }

@@ -9,7 +9,7 @@ namespace Cinema_Assignment.Models
         public string MovieTitle { get; set; }
         public DateTime StartTime { get; set; }
 
-        public List<TempSeatModel> Seats { get; set; } = new();
+        public List<ToggleSeatsRequest> Seats { get; set; } = new();
         public HashSet<string> LockedSeatIds { get; set; } = new();
         public Dictionary<int, SeatTypeModel> SeatTypes { get; set; } = new();
     }

@@ -20,12 +20,12 @@ namespace Cinema_Assignment.Controllers
 
         public int GenerateNextLayoutID()
         {
-            int nextID = 99999;
+            int nextID = 0;
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-                string sql = "SELECT ISNULL(MAX(LayoutID), 99999) + 1 FROM SeatLayoutConfigs";
+                string sql = "SELECT ISNULL(MAX(LayoutID), 0) + 1 FROM SeatLayoutConfigs";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 nextID = (int)cmd.ExecuteScalar();
             }
@@ -108,14 +108,14 @@ namespace Cinema_Assignment.Controllers
             var list = new List<SelectListItem>();
             using var conn = new SqlConnection(_connectionString);
             conn.Open();
-            var cmd = new SqlCommand("SELECT TypeID, Decription FROM SeatTypes", conn);
+            var cmd = new SqlCommand("SELECT TypeID, Description FROM SeatTypes", conn);
             var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 list.Add(new SelectListItem
                 {
                     Value = reader["TypeID"].ToString(),
-                    Text = reader["Decription"].ToString()
+                    Text = reader["Description"].ToString()
                 });
             }
             return list;
@@ -163,7 +163,7 @@ namespace Cinema_Assignment.Controllers
                     string seatName = $"{row}{col}";
 
                     var seatCmd = new SqlCommand(@"
-                        INSERT INTO Seats (SeatID, SeatName, RowChar, ColumNum, RoomID, TypeID, IsDisabled)
+                        INSERT INTO Seats (SeatID, SeatName, RowChar, ColumNum, RoomID, TypeID, IsLocked)
                         VALUES (@SeatID, @SeatName, @RowChar, @ColumNum, @RoomID, @TypeID, 0)", conn);
 
                     seatCmd.Parameters.AddWithValue("@SeatID", seatID);
@@ -255,7 +255,7 @@ namespace Cinema_Assignment.Controllers
                     string seatName = $"{row}{col}";
 
                     var seatCmd = new SqlCommand(@"
-                        INSERT INTO Seats (SeatID, SeatName, RowChar, ColumNum, RoomID, TypeID, IsDisabled)
+                        INSERT INTO Seats (SeatID, SeatName, RowChar, ColumNum, RoomID, TypeID, IsLocked)
                         VALUES (@SeatID, @SeatName, @RowChar, @ColumNum, @RoomID, @TypeID, 0)", conn);
 
                     seatCmd.Parameters.AddWithValue("@SeatID", seatID);

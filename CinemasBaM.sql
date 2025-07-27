@@ -150,6 +150,7 @@ Create table Seats
 	ColumNum int,
 	RoomID int,
 	TypeID int,
+	IsLocked Int,
 	Foreign Key (RoomID) References Rooms (RoomID),
 	Foreign Key (TypeID) References SeatTypes (TypeID)
 );
